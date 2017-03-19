@@ -1,6 +1,7 @@
 import pytest
-from ultimate_ttt import MainBoard, BoardCoords, Move
-from ultimate_ttt.errors import MoveOutsideMainBoardError, MoveOutsideSubBoardError
+from ultimate_ttt import MainBoard, BoardCoords, Move, Player, PlayerMove
+from ultimate_ttt.errors import MoveOutsideMainBoardError, MoveOutsideSubBoardError,\
+                            MoveNotOnNextBoardError, MoveInFinishedBoardError, BoardNotFinishedError
 
 def test_whenInitSizeIsStringThenExceptionRaised():
     with pytest.raises(ValueError):
@@ -45,62 +46,120 @@ def test_whenNewMoveIsOutsideValidSubBoardBoundsThenExceptionRaised():
     with pytest.raises(MoveOutsideSubBoardError):
         MainBoard().add_my_move(BoardCoords(1, 1), Move(1, 3))
 
-def whenNewMoveIsNotOnAvailableNextBoardThenExceptionRaised():
-    assert False
+def test_whenNewMoveIsNotOnGameNextBoardThenExceptionRaised():
+    board = MainBoard().add_my_move(BoardCoords(0, 0), Move(1, 1))
 
-def whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
-    assert False
+    #Move must now be on board at 1, 1
+    with pytest.raises(MoveNotOnNextBoardError):
+        board.add_opponent_move(BoardCoords(1, 0), Move(1, 1))
 
-def whenBoardSize3Then0x0IsOutOfBounds():
-    assert False
+def test_whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
+    main_board = MainBoard()
+    #Force some sub_board plays to finish a board
+    finished_sub_board = main_board._board[2][2]\
+                                    .add_my_move(Move(0, 0))\
+                                    .add_my_move(Move(1, 1))\
+                                    .add_my_move(Move(2, 2))
 
-def whenBoardSize3Then3x3IsInBounds():
-    assert False
+    #Set that sub-board where the next_board_coords will be
+    main_board._board[2][2] = finished_sub_board
+    #Play a move that will make the finished board the next board (Move 2, 2)
+    main_board = main_board.add_my_move(BoardCoords(0, 0), Move(2, 2))
+    #Playing anywhere is now allowed
+    assert main_board.next_board_coords == None
+    assert main_board.is_valid_board_for_next_move(BoardCoords(1, 1)) == True
+    main_board.add_opponent_move(BoardCoords(0, 0), Move(1, 1))
+
+def test_whenAllSubBoardsAreFinishedThenMainBoardIsFinished():
+    main_board = MainBoard(3)
+
+    for row in main_board._board:
+        for sub_board in row:
+            sub_board._is_finished = True
+
+    assert main_board.is_finished == True
+
+def test_whenMainBoardIsNotFinishedThenWinnerCheckRaisesException():
+    with pytest.raises(BoardNotFinishedError):
+        MainBoard().winner
+
+def test_whenRowOfSubBoardsIsWonThenMainBoardIsWon():
+
+    #LTR Diag check
+    ltr_check = MainBoard()
+    ltr_check = force_sub_board_win(ltr_check, 0, 0, Player.ME)
+    ltr_check = force_sub_board_win(ltr_check, 1, 1, Player.ME)
+    ltr_check = force_sub_board_win(ltr_check, 2, 2, Player.ME)
+
+    print(str(ltr_check))
+
+    assert ltr_check.is_finished == True
+    assert ltr_check.winner == Player.ME
+
+    #RTL Diag check
+    rtl_check = MainBoard()
+    rtl_check = force_sub_board_win(rtl_check, 0, 2, Player.OPPONENT)
+    rtl_check = force_sub_board_win(rtl_check, 1, 1, Player.OPPONENT)
+    rtl_check = force_sub_board_win(rtl_check, 2, 0, Player.OPPONENT)
+
+    assert rtl_check.is_finished == True
+    assert rtl_check.winner == Player.OPPONENT
+
+    #Row check
+    row_check = MainBoard()
+    row_check = force_sub_board_win(row_check, 0, 0, Player.ME)
+    row_check = force_sub_board_win(row_check, 1, 0, Player.ME)
+    row_check = force_sub_board_win(row_check, 2, 0, Player.ME)
+
+    assert row_check.is_finished == True
+    assert row_check.winner == Player.ME
+
+    #Col check
+    col_check = MainBoard()
+    col_check = force_sub_board_win(col_check, 0, 2, Player.OPPONENT)
+    col_check = force_sub_board_win(col_check, 1, 2, Player.OPPONENT)
+    col_check = force_sub_board_win(col_check, 2, 2, Player.OPPONENT)
+
+    assert col_check.is_finished == True
+    assert col_check.winner == Player.OPPONENT
+
+def test_whenMainBoardIsFinishedThenNewMoveRaisesException():
+    main_board = MainBoard()
+    main_board._is_finished = True
+
+    with pytest.raises(MoveInFinishedBoardError):
+        main_board.add_my_move(BoardCoords(1, 1), Move(1, 1))
+
+def test_whenAllSubBoardsFinishedWithNoWinnerThenResultIsATie():
+    main_board = MainBoard(3)
+    main_board = force_sub_board_win(main_board, 0, 0, Player.ME)
+    main_board = force_sub_board_win(main_board, 1, 1, Player.OPPONENT)
+    main_board = force_sub_board_tie(main_board, 2, 2)
+    main_board = force_sub_board_tie(main_board, 0, 1)
+    main_board = force_sub_board_tie(main_board, 1, 0)
+    main_board = force_sub_board_tie(main_board, 1, 2)
+    main_board = force_sub_board_tie(main_board, 2, 1)
+    main_board = force_sub_board_win(main_board, 0, 2, Player.ME)
+    main_board = force_sub_board_win(main_board, 2, 0, Player.OPPONENT)
+
+    assert main_board.is_finished == True
+    assert main_board.winner == Player.NONE
 
 def whenBoardIsPrettyPrintedThenItIsRenderedCorrectly():
     MainBoard(3).pretty_print_board()
 
-def areBoardDimensionXbyX(board, x):
-    if not len(board) == x:
-        return False
+def force_sub_board_win(main_board, board_row, board_col, player):
+    return main_board._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(player, Move(0, 0)))\
+                ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(player, Move(1, 1)))\
+                ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(player, Move(2, 2)))
 
-    for row in board:
-        if not len(row) == x:
-            return False
-
-    return True
-
-def whenMoveIsOutOfMainBoardBoundsThenExceptionRaised():
-    with pytest.raises(MoveOutsideMainBoardError):
-        MainBoard(3).play_square_in_sub_board(1,2,3,4)
-
-def whenMaxMovesExceededThenBoardIsFull():
-    assert False
-
-def whenWinnerGetsSetOrBoardIsFullThenBoardIsFinished():
-    assert False
-
-def whenBoardIsFullAndMoveAttemptedThenExceptionRaised():
-    assert False
-
-def whenRowFilledThenRowCheckReturnsWon():
-    assert False
-
-def whenRowNotFilledThenRowCheckReturnsNotWon():
-    assert False
-
-def whenColumnFilledThenColumnCheckReturnsWon():
-    assert False
-
-def whenColumnNotFilledThenColumnCheckReturnsNotWon():
-    assert False
-
-#Do both here?
-def whenDiagonalFilledThenDiagonalCheckReturnsWon():
-    assert False
-
-def whenDiagonalNotFilledThenDiagonalCheckReturnsNotWon():
-    assert False
-
-def whenBoardIsFinishedAndWinnerNotSetThenSetResultToTie():
-    assert False
+def force_sub_board_tie(main_board, board_row, board_col):
+    return main_board._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.ME, Move(0, 0)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.OPPONENT, Move(1, 1)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.ME, Move(2, 2)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.OPPONENT, Move(0, 2)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.ME, Move(2, 0)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.OPPONENT, Move(1, 0)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.ME, Move(1, 2)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.OPPONENT, Move(2, 1)))\
+                        ._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(Player.ME, Move(0, 1)))

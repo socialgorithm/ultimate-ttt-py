@@ -11,7 +11,15 @@ class MoveOutsideMainBoardError(Error):
         self.coords = board_coords
 
     def __str__(self):
-        return "Co-ordinate ("+str(self.coords.row)+","+str(self.coords.col)+") made outside main board bounds"
+        return "Co-ordinate ("+str(self.coords)+") made outside main board bounds"
+
+class MoveNotOnNextBoardError(Error):
+    def __init__(self, board_coords, next_board_coords):
+        self.coords = board_coords
+        self.next_board_coords = next_board_coords
+
+    def __str__(self):
+        return "Next board to play is "+self.next_board_coords+", but player played "+self.coords
 
 class MoveOutsideSubBoardError(Error):
     def __init__(self, move):
@@ -21,11 +29,15 @@ class MoveOutsideSubBoardError(Error):
         return "Move ("+str(self.move.row)+","+str(self.move.col)+") made outside sub board bounds"
 
 class MoveInPlayedCellError(Error):
-    def __init__(self, move):
+    def __init__(self, move, board_coords = None):
         self.move = move
+        self.board_coords = board_coords
 
     def __str__(self):
-        return "Move ("+str(self.move.row)+","+str(self.move.col)+") made in already played cell"
+        msg = "Move "+str(self.move)+" made in already played cell"
+        if not self.board_coords == None:
+            msg += " in board "+str(self.board_coords)
+        return msg
 
 class MoveInFinishedBoardError(Error):
     def __init__(self, move):

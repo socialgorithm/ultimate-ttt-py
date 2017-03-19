@@ -14,6 +14,16 @@ class Move(object):
         self.row = row
         self.col = col
 
+    def __eq__(self, other):
+        return not(other == None) and \
+            self.row == other.row and self.col == other.col
+
+    def __ne__(self, other):
+        return not self == other
+
+    def __str__(self):
+        return "("+str(self.row)+","+str(self.col)+")"
+
 class PlayerMove(Move):
     """A move by a specific player"""
     def __init__(self, player, move):

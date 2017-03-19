@@ -39,6 +39,7 @@ class SubBoard(object):
 
         self._max_moves = board_size * board_size;
         self._moves_so_far = 0
+
         self._is_finished = False
         self._winner = Player.NONE
 
@@ -88,20 +89,23 @@ class SubBoard(object):
     def add_move(self, player_move):
         """Adds a move by a player to a deep copy of the board, returning the copy
 
+        Player may find it easier to use the `add_my_move` and `add_opponent_move`
+        convenience methods so they don't have to create PlayerMove objects
+
         Args:
             player_move: Player and intended move
 
         Returns:
             A new SubBoard instance with the move applied and all properties calculated
         """
+        if self.is_finished == True:
+            raise MoveInFinishedBoardError(player_move)
+
         if not(self._is_move_in_bounds(player_move)):
             raise MoveOutsideSubBoardError(player_move)
 
         if self._is_move_already_played(player_move):
             raise MoveInPlayedCellError(player_move)
-
-        if self.is_finished == True:
-            raise MoveInFinishedBoardError(player_move)
 
         #Copy the board so we can update it
         #Maybe this should all go in the constructor/classmethod
