@@ -145,8 +145,22 @@ def test_whenAllSubBoardsFinishedWithNoWinnerThenResultIsATie():
     assert main_board.is_finished == True
     assert main_board.winner == Player.NONE
 
-def whenBoardIsPrettyPrintedThenItIsRenderedCorrectly():
-    MainBoard(3).pretty_print_board()
+def test_whenBoardIsPrettyPrintedThenItIsRenderedCorrectly():
+    string_board = str(MainBoard(3).add_my_move(BoardCoords(0, 0), Move(1, 1))\
+                                    .add_opponent_move(BoardCoords(1, 1), Move(2, 2))\
+                                    .add_opponent_move(BoardCoords(2, 2), Move(0, 0)))
+
+    assert string_board == "0 0 0 | 0 0 0 | 0 0 0 \n"+\
+                            "0 1 0 | 0 0 0 | 0 0 0 \n"+\
+                            "0 0 0 | 0 0 0 | 0 0 0 \n"+\
+                            "- - - | - - - | - - - \n"+\
+                            "0 0 0 | 0 0 0 | 0 0 0 \n"+\
+                            "0 0 0 | 0 0 0 | 0 0 0 \n"+\
+                            "0 0 0 | 0 0 2 | 0 0 0 \n"+\
+                            "- - - | - - - | - - - \n"+\
+                            "0 0 0 | 0 0 0 | 2 0 0 \n"+\
+                            "0 0 0 | 0 0 0 | 0 0 0 \n"+\
+                            "0 0 0 | 0 0 0 | 0 0 0 \n"
 
 def force_sub_board_win(main_board, board_row, board_col, player):
     return main_board._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(player, Move(0, 0)))\

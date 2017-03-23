@@ -99,10 +99,28 @@ class MainBoard(object):
     def __str__(self):
         """Returns a pretty printed representation of the main board"""
         pretty_printed = ''
-        for row in self._board:
-            for sub_board in row:
-                pretty_printed += str(sub_board.is_finished)+' '
-            pretty_printed += '\n'
+        #TODO: Shouldn't access sub-board private var
+        board_size = len(self._board)
+        board_size_range = range(board_size)
+        for (mb_idx,mb_row) in enumerate(self._board):
+            for sub_board_row_num in board_size_range:
+                for (sb_idx,sub_board) in enumerate(mb_row):
+                    for cell in sub_board._board[sub_board_row_num]:
+                        pretty_printed += str(cell)+' '
+                    #Print vertical separator - if not last sub_board
+                    if(sb_idx < board_size - 1):
+                        pretty_printed += '| '
+                pretty_printed += '\n'
+            #Print horizontal separators
+            #Only if this is not the last row
+            if(mb_idx < board_size - 1):
+                for (bm_idx, board_marker) in enumerate(board_size_range):
+                    for cell_marker in board_size_range:
+                        pretty_printed += '- '
+                    if(bm_idx < board_size - 1):
+                        pretty_printed += '| '
+                pretty_printed += '\n'
+
         return pretty_printed
 
     ### Private functions
