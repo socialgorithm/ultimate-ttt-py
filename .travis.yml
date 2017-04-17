@@ -4,5 +4,9 @@ python:
   - "3.5"
   - "3.6"
   - "nightly"
-# command to run tests
-script: python3 setup.py test
+install:
+  - pip3 install coveralls
+script:
+  coverage run --source=ultimate_ttt setup.py test
+after_success:
+  coveralls
