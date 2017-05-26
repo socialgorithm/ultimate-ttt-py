@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ultimate_ttt.main_board &mdash; Ultimate TTT Python Engine 0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Ultimate TTT Python Engine 0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Ultimate TTT Python Engine
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Ultimate TTT Python Engine</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>ultimate_ttt.main_board</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ultimate_ttt.main_board</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">.sub_board</span> <span class="k">import</span> <span class="n">SubBoard</span>
+<span class="kn">from</span> <span class="nn">.cell</span> <span class="k">import</span> <span class="n">Cell</span>
+<span class="kn">from</span> <span class="nn">.gameplay</span> <span class="k">import</span> <span class="n">Player</span><span class="p">,</span> <span class="n">PlayerMove</span><span class="p">,</span> <span class="n">BoardCoords</span>
+<span class="kn">from</span> <span class="nn">.gameplay</span> <span class="k">import</span> <span class="n">is_winning_move</span>
+<span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">MoveOutsideMainBoardError</span><span class="p">,</span> <span class="n">MoveNotOnNextBoardError</span><span class="p">,</span>\
+                    <span class="n">BoardNotFinishedError</span><span class="p">,</span> <span class="n">MoveInFinishedBoardError</span><span class="p">,</span>\
+                    <span class="n">MoveInPlayedCellError</span>
+
+<div class="viewcode-block" id="MainBoard"><a class="viewcode-back" href="../../source/ultimate_ttt.html#ultimate_ttt.main_board.MainBoard">[docs]</a><span class="k">class</span> <span class="nc">MainBoard</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An Ultimate TicTacToe board, containing several SubBoards where players play</span>
+
+<span class="sd">    When the board size is 3, the main board looks like this:</span>
+
+<span class="sd">    ::</span>
+<span class="sd">        | SubBoard 0,0 | SubBoard 0,1 | SubBoard 0,2 |</span>
+<span class="sd">        | SubBoard 1,0 | SubBoard 1,1 | SubBoard 1,2 |</span>
+<span class="sd">        | SubBoard 2,0 | SubBoard 2,1 | SubBoard 2,2 |</span>
+
+<span class="sd">    Each SubBoard looks like this:</span>
+
+<span class="sd">    ::</span>
+<span class="sd">        | Cell 0,0 | Cell 0,1 | Cell 0,2 |</span>
+<span class="sd">        | Cell 1,0 | Cell 1,1 | Cell 1,2 |</span>
+<span class="sd">        | Cell 2,0 | Cell 2,1 | Cell 2,2 |</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">board_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">board_size</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Size must be integer of size 3 (for now)&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_board</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="n">SubBoard</span><span class="p">()</span> <span class="k">for</span> <span class="n">board_col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">board_size</span><span class="p">)]</span>
+                <span class="k">for</span> <span class="n">board_row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">board_size</span><span class="p">)</span>
+            <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_next_player</span> <span class="o">=</span> <span class="n">Player</span><span class="o">.</span><span class="n">NONE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_next_board_coords</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_finished</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_winner</span> <span class="o">=</span> <span class="n">Player</span><span class="o">.</span><span class="n">NONE</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">next_board_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The next board to play on. None if the next move can be on any board&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next_board_coords</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Whether the board is finished (tied, won or lost)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_finished</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">sub_board</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sub_board</span><span class="o">.</span><span class="n">is_finished</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">winner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The winner of the board if finished. Exception otherwise&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_finished</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">BoardNotFinishedError</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_winner</span>
+
+<div class="viewcode-block" id="MainBoard.add_my_move"><a class="viewcode-back" href="../../source/ultimate_ttt.html#ultimate_ttt.main_board.MainBoard.add_my_move">[docs]</a>    <span class="k">def</span> <span class="nf">add_my_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">,</span> <span class="n">move</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds your move to the specified sub-board</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            board_coords: The co-ordinates (row, column) of the SubBoard to play on</span>
+<span class="sd">            move: The move (row, column) to make on the SubBoard</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new MainBoard instance with the move applied</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_move</span><span class="p">(</span><span class="n">board_coords</span><span class="p">,</span> <span class="n">PlayerMove</span><span class="p">(</span><span class="n">Player</span><span class="o">.</span><span class="n">ME</span><span class="p">,</span> <span class="n">move</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MainBoard.add_opponent_move"><a class="viewcode-back" href="../../source/ultimate_ttt.html#ultimate_ttt.main_board.MainBoard.add_opponent_move">[docs]</a>    <span class="k">def</span> <span class="nf">add_opponent_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">,</span> <span class="n">move</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds the opponent&#39;s move to the specified sub-board</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            board_coords: The co-ordinates (row, column) of the SubBoard to play on</span>
+<span class="sd">            move: The move (row, column) to make on the SubBoard</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new MainBoard instance with the move applied</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_move</span><span class="p">(</span><span class="n">board_coords</span><span class="p">,</span> <span class="n">PlayerMove</span><span class="p">(</span><span class="n">Player</span><span class="o">.</span><span class="n">OPPONENT</span><span class="p">,</span> <span class="n">move</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MainBoard.is_valid_board_for_next_move"><a class="viewcode-back" href="../../source/ultimate_ttt.html#ultimate_ttt.main_board.MainBoard.is_valid_board_for_next_move">[docs]</a>    <span class="k">def</span> <span class="nf">is_valid_board_for_next_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_board_coords</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_board_coords</span> <span class="o">==</span> <span class="n">board_coords</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a pretty printed representation of the main board&quot;&quot;&quot;</span>
+        <span class="n">pretty_printed</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1">#TODO: Shouldn&#39;t access sub-board private var</span>
+        <span class="n">board_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">)</span>
+        <span class="n">board_size_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">board_size</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">mb_idx</span><span class="p">,</span><span class="n">mb_row</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">sub_board_row_num</span> <span class="ow">in</span> <span class="n">board_size_range</span><span class="p">:</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">sb_idx</span><span class="p">,</span><span class="n">sub_board</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mb_row</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">sub_board</span><span class="o">.</span><span class="n">_board</span><span class="p">[</span><span class="n">sub_board_row_num</span><span class="p">]:</span>
+                        <span class="n">pretty_printed</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span>
+                    <span class="c1">#Print vertical separator - if not last sub_board</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">sb_idx</span> <span class="o">&lt;</span> <span class="n">board_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="n">pretty_printed</span> <span class="o">+=</span> <span class="s1">&#39;| &#39;</span>
+                <span class="n">pretty_printed</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="c1">#Print horizontal separators</span>
+            <span class="c1">#Only if this is not the last row</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">mb_idx</span> <span class="o">&lt;</span> <span class="n">board_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">bm_idx</span><span class="p">,</span> <span class="n">board_marker</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">board_size_range</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">cell_marker</span> <span class="ow">in</span> <span class="n">board_size_range</span><span class="p">:</span>
+                        <span class="n">pretty_printed</span> <span class="o">+=</span> <span class="s1">&#39;- &#39;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">bm_idx</span> <span class="o">&lt;</span> <span class="n">board_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="n">pretty_printed</span> <span class="o">+=</span> <span class="s1">&#39;| &#39;</span>
+                <span class="n">pretty_printed</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="k">return</span> <span class="n">pretty_printed</span>
+
+    <span class="c1">### Private functions</span>
+
+    <span class="k">def</span> <span class="nf">_add_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">,</span> <span class="n">player_move</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a move by a player to a deep copy of the current board, returning the copy</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_main_board_move: Player, co-ordinates of the SubBoard, and intended move on that SubBoard</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new MainBoard instance with the move applied and all properties calculated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_finished</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MoveInFinishedBoardError</span><span class="p">(</span><span class="n">board_coords</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_board_in_bounds</span><span class="p">(</span><span class="n">board_coords</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">MoveOutsideMainBoardError</span><span class="p">(</span><span class="n">board_coords</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid_board_for_next_move</span><span class="p">(</span><span class="n">board_coords</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">MoveNotOnNextBoardError</span><span class="p">(</span><span class="n">board_coords</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next_board_coords</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_applying_move</span><span class="p">(</span><span class="n">board_coords</span><span class="p">,</span> <span class="n">player_move</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_copy_applying_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">,</span> <span class="n">player_move</span><span class="p">):</span>
+        <span class="c1">#Apply the move to the sub board first to ensure it works</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">updated_sub_board</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">[</span><span class="n">board_coords</span><span class="o">.</span><span class="n">row</span><span class="p">][</span><span class="n">board_coords</span><span class="o">.</span><span class="n">col</span><span class="p">]</span>\
+                                    <span class="o">.</span><span class="n">add_move</span><span class="p">(</span><span class="n">player_move</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">MoveInPlayedCellError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MoveInPlayedCellError</span><span class="p">(</span><span class="n">player_move</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+        <span class="c1">#Copy the board so we can update it</span>
+        <span class="c1">#Maybe this should all go in the constructor/classmethod</span>
+        <span class="n">updated_main_board</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_board</span><span class="p">[</span><span class="n">board_coords</span><span class="o">.</span><span class="n">row</span><span class="p">][</span><span class="n">board_coords</span><span class="o">.</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated_sub_board</span>
+
+        <span class="c1">#Check that the next board to play is not finished</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_board</span><span class="p">[</span><span class="n">player_move</span><span class="o">.</span><span class="n">row</span><span class="p">][</span><span class="n">player_move</span><span class="o">.</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">is_finished</span><span class="p">:</span>
+            <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_next_board_coords</span> <span class="o">=</span> <span class="n">BoardCoords</span><span class="p">(</span><span class="n">player_move</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">player_move</span><span class="o">.</span><span class="n">col</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_next_board_coords</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1">#Convert to board of cells format so we can reuse check logic</span>
+        <span class="n">cell_board</span> <span class="o">=</span> <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_as_cell_board</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">is_winning_move</span><span class="p">(</span><span class="n">cell_board</span><span class="p">,</span> <span class="n">PlayerMove</span><span class="p">(</span><span class="n">player_move</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="n">board_coords</span><span class="p">)):</span>
+            <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_is_finished</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">updated_main_board</span><span class="o">.</span><span class="n">_winner</span> <span class="o">=</span> <span class="n">player_move</span><span class="o">.</span><span class="n">player</span>
+
+        <span class="k">return</span> <span class="n">updated_main_board</span>
+
+    <span class="k">def</span> <span class="nf">_as_cell_board</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns this main board in the form of a board of cells</span>
+
+<span class="sd">        Each cell represents a sub-board of this board, with</span>
+<span class="sd">        `cell.played_by` set to the player that won the board (Player.NONE if tied)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[[</span><span class="n">Cell</span><span class="p">(</span><span class="n">sub_board</span><span class="o">.</span><span class="n">winner</span><span class="p">)</span> <span class="k">if</span> <span class="n">sub_board</span><span class="o">.</span><span class="n">is_finished</span> <span class="k">else</span> <span class="n">Cell</span><span class="p">(</span><span class="n">Player</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="k">for</span> <span class="n">sub_board</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_is_board_in_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the given move is inside the boundaries of the main board</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            coords: The coords of the intended sub-board</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the move is within the bounds of the main board, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">coords</span><span class="o">.</span><span class="n">row</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">coords</span><span class="o">.</span><span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="n">coords</span><span class="o">.</span><span class="n">col</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">coords</span><span class="o">.</span><span class="n">col</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_board</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Bharat Reddy, Victor Darvariu.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

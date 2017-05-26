@@ -13,15 +13,19 @@ class MainBoard(object):
 
     When the board size is 3, the main board looks like this:
 
-    | SubBoard 0,0 | SubBoard 0,1 | SubBoard 0,2 |
-    | SubBoard 1,0 | SubBoard 1,1 | SubBoard 1,2 |
-    | SubBoard 2,0 | SubBoard 2,1 | SubBoard 2,2 |
+    ::
+
+        | SubBoard 0,0 | SubBoard 0,1 | SubBoard 0,2 |
+        | SubBoard 1,0 | SubBoard 1,1 | SubBoard 1,2 |
+        | SubBoard 2,0 | SubBoard 2,1 | SubBoard 2,2 |
 
     Each SubBoard looks like this:
 
-    | Cell 0,0 | Cell 0,1 | Cell 0,2 |
-    | Cell 1,0 | Cell 1,1 | Cell 1,2 |
-    | Cell 2,0 | Cell 2,1 | Cell 2,2 |
+    ::
+
+        | Cell 0,0 | Cell 0,1 | Cell 0,2 |
+        | Cell 1,0 | Cell 1,1 | Cell 1,2 |
+        | Cell 2,0 | Cell 2,1 | Cell 2,2 |
 
     """
 
@@ -90,6 +94,11 @@ class MainBoard(object):
         return self._add_move(board_coords, PlayerMove(Player.OPPONENT, move))
 
     def is_valid_board_for_next_move(self, board_coords):
+        """Whether this is a valid board for the next move
+
+        Args:
+            board_coords: The co-ordinates (row, column) of the SubBoard to check
+        """
         if self.next_board_coords == None:
             return True
         elif self.next_board_coords == board_coords:

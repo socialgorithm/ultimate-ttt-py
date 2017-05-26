@@ -12,4 +12,5 @@ class Cell(object):
         return str(self.played_by.value)
 
     def is_played(self):
+        """Whether this cell has been played by a player"""
         return not(self.played_by == Player.NONE)

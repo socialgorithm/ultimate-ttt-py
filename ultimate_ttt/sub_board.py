@@ -11,21 +11,21 @@ class SubBoard(object):
 
     Instances of this class behave in a functional manner, with no method call
     modifying the state of the original object. State changing operations (such
-    as `add_my_move`) return a new SubBoard object, which the calling function
+    as :code:`add_my_move`) return a new SubBoard object, which the calling function
     must replace. The returned SubBoard object has all properties (e.g. is_finished)
     calculated.
 
+    .. highlight:: python
     Example:
-    ```
+    ::
         SubBoard(3) #Initialises a board of size 3
             .add_my_move(Move(1, 1)) #Adds a move at 1, 1 and returns a SubBoard
             .add_opponent_move(Move(2, 1)) #Adds a move to the last returned board
-    ```
 
-    Call `str(SubBoard())` to get a pretty-printed representation of this board
+    Call :code:`str(SubBoard())` to get a pretty-printed representation of this board
 
     Todo:
-        * Use a `@classmethod` to initialize SubBoard and make it immutable internally
+        * Use a :code:`@classmethod` to initialize SubBoard and make it immutable internally
 
     """
     def __init__(self, board_size = 3):
@@ -89,8 +89,9 @@ class SubBoard(object):
     def add_move(self, player_move):
         """Adds a move by a player to a deep copy of the board, returning the copy
 
-        Player may find it easier to use the `add_my_move` and `add_opponent_move`
-        convenience methods so they don't have to create PlayerMove objects
+        Player may find it easier to use the :code:`add_my_move` and
+        :code:`add_opponent_move` convenience methods so they don't have to create
+        PlayerMove objects
 
         Args:
             player_move: Player and intended move
