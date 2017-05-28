@@ -114,6 +114,25 @@ def test_whenNewMoveIsInFinishedBoardThenExceptionRaised():
     with pytest.raises(MoveInFinishedBoardError):
         finished_board.add_my_move(Move(1, 1))
 
+def test_whenBoardIsPlayedThenGetValidMovesReturnsCorrectly():
+    board = SubBoard().add_my_move(Move(0,0))\
+                .add_opponent_move(Move(1,1))\
+                .add_my_move(Move(2,1))
+
+    assert board.get_valid_moves() == \
+                        [Move(0, 1), Move(0, 2),\
+                        Move(1, 0), Move(1, 2),\
+                        Move(2, 0), Move(2, 2)]
+
+def test_whenBoardIsFinishedThenGetValidMovesIsEmpty():
+    board = SubBoard().add_my_move(Move(0, 0))\
+                        .add_opponent_move(Move(0, 1))\
+                        .add_my_move(Move(1, 1))\
+                        .add_opponent_move(Move(0, 2))\
+                        .add_my_move(Move(2, 2))
+
+    assert len(board.get_valid_moves()) is 0
+
 def test_whenBoardIsInProgressThenBoardIsNotFinished():
     assert SubBoard().add_my_move(Move(0, 0))\
                 .add_my_move(Move(0, 1))\

@@ -33,6 +33,7 @@ class MainBoard(object):
         if not isinstance(board_size, int) or not board_size == 3:
             raise ValueError("Size must be integer of size 3 (for now)")
 
+        self._board_size = board_size
         self._board = [
                 [SubBoard() for board_col in range(board_size)]
                 for board_row in range(board_size)
@@ -92,6 +93,29 @@ class MainBoard(object):
             A new MainBoard instance with the move applied
         """
         return self._add_move(board_coords, PlayerMove(Player.OPPONENT, move))
+
+    def get_sub_board(self, board_coords):
+        row = board_coords.row
+        col = board_coords.col
+        return self._board[row][col]
+
+    def get_valid_boards(self):
+        """Returns all board co-ordinates that are valid for the next move. Empty if board is finished.
+
+        Returns:
+            Array of valid board co-ordinates (Row, Col), e.g. [BoardCoords(2, 2),BoardCoords(1, 1)]
+        """
+        if self.next_board_coords is not None:
+            return [self.next_board_coords]
+        else:
+            if self.is_finished:
+                return []
+            available_boards = []
+            for row_index in range(0, self._board_size):
+                for col_index in range(0, self._board_size):
+                    if not self._board[row_index][col_index].is_finished:
+                        available_boards.append(BoardCoords(row_index, col_index))
+            return available_boards
 
     def is_valid_board_for_next_move(self, board_coords):
         """Whether this is a valid board for the next move

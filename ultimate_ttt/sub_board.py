@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 from .cell import Cell
-from .gameplay import Player, PlayerMove
+from .gameplay import Player, PlayerMove, Move
 from .gameplay import is_winning_move
 from .errors import MoveOutsideSubBoardError, MoveInPlayedCellError,\
                     MoveInFinishedBoardError, BoardNotFinishedError
@@ -32,6 +32,7 @@ class SubBoard(object):
         if not isinstance(board_size, int) or not board_size == 3:
             raise ValueError("Size must be integer of size 3 (for now)")
 
+        self._board_size = board_size
         self._board = [
                 [Cell() for board_col in range(board_size)]
                 for board_row in range(board_size)
@@ -122,6 +123,20 @@ class SubBoard(object):
             updated_sub_board._is_finished = True
 
         return updated_sub_board
+
+    def get_valid_moves(self):
+        """
+        Returns:
+            All valid Moves, corresponding to non-played cells in SubBoard. Empty if board is finished.
+        """
+        if self.is_finished:
+            return []
+        valid_moves = []
+        for row_index in range(0, self._board_size):
+            for col_index in range(0, self._board_size):
+                if not self._board[row_index][col_index].is_played():
+                    valid_moves.append(Move(row_index, col_index))
+        return valid_moves
 
     ### Private functions
 
