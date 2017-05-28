@@ -36,22 +36,26 @@ class BoardCoords(Move):
         super().__init__(main_board_row, main_board_col)
 
 def is_winning_move(board, player_move):
+    """Whether the given player move is a winning move"""
     return (is_row_won(board, player_move) or is_col_won(board, player_move) or
                 is_diagonal_won(board, player_move))
 
 def is_row_won(board, player_move):
+    """Whether the row of the player move is won by the player of the move"""
     for cell in board[player_move.row]:
         if not cell.played_by == player_move.player:
             return False
     return True
 
 def is_col_won(board, player_move):
+    """Whether the column of the player move is won by the player of the move"""
     for row in board:
         if not row[player_move.col].played_by == player_move.player:
             return False
     return True
 
 def is_diagonal_won(board, player_move):
+    """Whether either diagonal from the cell of the player move is won by the player"""
     ltr_diagonal = [[0,0],[1,1],[2,2]]
     rtl_diagonal = [[0,2],[1,1],[2,0]]
 

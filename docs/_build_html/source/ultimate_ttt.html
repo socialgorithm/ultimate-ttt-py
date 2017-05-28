@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ultimate_ttt package &mdash; Ultimate TTT Python Engine 0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Ultimate TTT Python Engine 0 documentation" href="../index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Ultimate TTT Python Engine
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ultimate_ttt package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ultimate_ttt.main_board">ultimate_ttt.main_board module</a></li>
+<li><a class="reference internal" href="#module-ultimate_ttt.sub_board">ultimate_ttt.sub_board module</a></li>
+<li><a class="reference internal" href="#module-ultimate_ttt.cell">ultimate_ttt.cell module</a></li>
+<li><a class="reference internal" href="#module-ultimate_ttt.gameplay">ultimate_ttt.gameplay module</a></li>
+<li><a class="reference internal" href="#module-ultimate_ttt.errors">ultimate_ttt.errors module</a></li>
+<li><a class="reference internal" href="#module-ultimate_ttt">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Ultimate TTT Python Engine</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>ultimate_ttt package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/ultimate_ttt.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ultimate-ttt-package">
+<h1>ultimate_ttt package<a class="headerlink" href="#ultimate-ttt-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ultimate_ttt.main_board">
+<span id="ultimate-ttt-main-board-module"></span><h2>ultimate_ttt.main_board module<a class="headerlink" href="#module-ultimate_ttt.main_board" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ultimate_ttt.main_board.MainBoard">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.main_board.</code><code class="descname">MainBoard</code><span class="sig-paren">(</span><em>board_size=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/main_board.html#MainBoard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>An Ultimate TicTacToe board, containing several SubBoards where players play</p>
+<p>When the board size is 3, the main board looks like this:</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><div class="first last line-block">
+<div class="line">SubBoard 0,0 | SubBoard 0,1 | SubBoard 0,2 |</div>
+<div class="line">SubBoard 1,0 | SubBoard 1,1 | SubBoard 1,2 |</div>
+<div class="line">SubBoard 2,0 | SubBoard 2,1 | SubBoard 2,2 |</div>
+</div>
+</dd>
+</dl>
+<p>Each SubBoard looks like this:</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><div class="first last line-block">
+<div class="line">Cell 0,0 | Cell 0,1 | Cell 0,2 |</div>
+<div class="line">Cell 1,0 | Cell 1,1 | Cell 1,2 |</div>
+<div class="line">Cell 2,0 | Cell 2,1 | Cell 2,2 |</div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="ultimate_ttt.main_board.MainBoard.add_my_move">
+<code class="descname">add_my_move</code><span class="sig-paren">(</span><em>board_coords</em>, <em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/main_board.html#MainBoard.add_my_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.add_my_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds your move to the specified sub-board</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>board_coords: The co-ordinates (row, column) of the SubBoard to play on
+move: The move (row, column) to make on the SubBoard</dd>
+<dt>Returns:</dt>
+<dd>A new MainBoard instance with the move applied</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ultimate_ttt.main_board.MainBoard.add_opponent_move">
+<code class="descname">add_opponent_move</code><span class="sig-paren">(</span><em>board_coords</em>, <em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/main_board.html#MainBoard.add_opponent_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.add_opponent_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the opponent’s move to the specified sub-board</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>board_coords: The co-ordinates (row, column) of the SubBoard to play on
+move: The move (row, column) to make on the SubBoard</dd>
+<dt>Returns:</dt>
+<dd>A new MainBoard instance with the move applied</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.main_board.MainBoard.is_finished">
+<code class="descname">is_finished</code><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.is_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the board is finished (tied, won or lost)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ultimate_ttt.main_board.MainBoard.is_valid_board_for_next_move">
+<code class="descname">is_valid_board_for_next_move</code><span class="sig-paren">(</span><em>board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/main_board.html#MainBoard.is_valid_board_for_next_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.is_valid_board_for_next_move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.main_board.MainBoard.next_board_coords">
+<code class="descname">next_board_coords</code><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.next_board_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>The next board to play on. None if the next move can be on any board</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.main_board.MainBoard.winner">
+<code class="descname">winner</code><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.winner" title="Permalink to this definition">¶</a></dt>
+<dd><p>The winner of the board if finished. Exception otherwise</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ultimate_ttt.sub_board">
+<span id="ultimate-ttt-sub-board-module"></span><h2>ultimate_ttt.sub_board module<a class="headerlink" href="#module-ultimate_ttt.sub_board" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ultimate_ttt.sub_board.SubBoard">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.sub_board.</code><code class="descname">SubBoard</code><span class="sig-paren">(</span><em>board_size=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/sub_board.html#SubBoard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.sub_board.SubBoard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>A single game of TicTacToe (not ultimate). Several of these make up the Ultimate TTT game.</p>
+<p>Instances of this class behave in a functional manner, with no method call
+modifying the state of the original object. State changing operations (such
+as <code class="code docutils literal"><span class="pre">add_my_move</span></code>) return a new SubBoard object, which the calling function
+must replace. The returned SubBoard object has all properties (e.g. is_finished)
+calculated.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">SubBoard</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#Initialises a board of size 3</span>
+    <span class="o">.</span><span class="n">add_my_move</span><span class="p">(</span><span class="n">Move</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1">#Adds a move at 1, 1 and returns a SubBoard</span>
+    <span class="o">.</span><span class="n">add_opponent_move</span><span class="p">(</span><span class="n">Move</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1">#Adds a move to the last returned board</span>
+</pre></div>
+</div>
+<p>Call <code class="code docutils literal"><span class="pre">str(SubBoard())</span></code> to get a pretty-printed representation of this board</p>
+<dl class="docutils">
+<dt>Todo:</dt>
+<dd><ul class="first last simple">
+<li>Use a <code class="code docutils literal"><span class="pre">&#64;classmethod</span></code> to initialize SubBoard and make it immutable internally</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="ultimate_ttt.sub_board.SubBoard.add_move">
+<code class="descname">add_move</code><span class="sig-paren">(</span><em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/sub_board.html#SubBoard.add_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.sub_board.SubBoard.add_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a move by a player to a deep copy of the board, returning the copy</p>
+<p>Player may find it easier to use the <code class="code docutils literal"><span class="pre">add_my_move</span></code> and
+<code class="code docutils literal"><span class="pre">add_opponent_move</span></code> convenience methods so they don’t have to create
+PlayerMove objects</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player_move: Player and intended move</dd>
+<dt>Returns:</dt>
+<dd>A new SubBoard instance with the move applied and all properties calculated</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ultimate_ttt.sub_board.SubBoard.add_my_move">
+<code class="descname">add_my_move</code><span class="sig-paren">(</span><em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/sub_board.html#SubBoard.add_my_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.sub_board.SubBoard.add_my_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a move for the current player</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>move: Move co-ordinates</dd>
+<dt>Returns:</dt>
+<dd>A new SubBoard instance with the move applied</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ultimate_ttt.sub_board.SubBoard.add_opponent_move">
+<code class="descname">add_opponent_move</code><span class="sig-paren">(</span><em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/sub_board.html#SubBoard.add_opponent_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.sub_board.SubBoard.add_opponent_move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a move for the opponent</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>move: Move co-ordinates</dd>
+<dt>Returns:</dt>
+<dd>A new SubBoard instance with the move applied</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.sub_board.SubBoard.is_finished">
+<code class="descname">is_finished</code><a class="headerlink" href="#ultimate_ttt.sub_board.SubBoard.is_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the board is finished (tied, won or lost)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.sub_board.SubBoard.winner">
+<code class="descname">winner</code><a class="headerlink" href="#ultimate_ttt.sub_board.SubBoard.winner" title="Permalink to this definition">¶</a></dt>
+<dd><p>The winner of the board if finished. Exception otherwise</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ultimate_ttt.cell">
+<span id="ultimate-ttt-cell-module"></span><h2>ultimate_ttt.cell module<a class="headerlink" href="#module-ultimate_ttt.cell" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ultimate_ttt.cell.Cell">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.cell.</code><code class="descname">Cell</code><span class="sig-paren">(</span><em>played_by=&lt;Player.NONE: 0&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/cell.html#Cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.cell.Cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>A cell in a game of TicTacToe</p>
+<p>This class records the player</p>
+<dl class="method">
+<dt id="ultimate_ttt.cell.Cell.is_played">
+<code class="descname">is_played</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/cell.html#Cell.is_played"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.cell.Cell.is_played" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ultimate_ttt.gameplay">
+<span id="ultimate-ttt-gameplay-module"></span><h2>ultimate_ttt.gameplay module<a class="headerlink" href="#module-ultimate_ttt.gameplay" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ultimate_ttt.gameplay.BoardCoords">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">BoardCoords</code><span class="sig-paren">(</span><em>main_board_row</em>, <em>main_board_col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#BoardCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.BoardCoords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.gameplay.Move" title="ultimate_ttt.gameplay.Move"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.gameplay.Move</span></code></a></p>
+<p>Convenience wrapper to represent MainBoard co-ordinates (referencing a SubBoard)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="ultimate_ttt.gameplay.Move">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">Move</code><span class="sig-paren">(</span><em>row</em>, <em>col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#Move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.Move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Move co-ordinates (in a SubBoard)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="ultimate_ttt.gameplay.Player">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">Player</code><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#Player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.Player" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>Identifiers for players</p>
+<dl class="attribute">
+<dt id="ultimate_ttt.gameplay.Player.ME">
+<code class="descname">ME</code><em class="property"> = 1</em><a class="headerlink" href="#ultimate_ttt.gameplay.Player.ME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.gameplay.Player.NONE">
+<code class="descname">NONE</code><em class="property"> = 0</em><a class="headerlink" href="#ultimate_ttt.gameplay.Player.NONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.gameplay.Player.ONE">
+<code class="descname">ONE</code><em class="property"> = 1</em><a class="headerlink" href="#ultimate_ttt.gameplay.Player.ONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.gameplay.Player.OPPONENT">
+<code class="descname">OPPONENT</code><em class="property"> = 2</em><a class="headerlink" href="#ultimate_ttt.gameplay.Player.OPPONENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ultimate_ttt.gameplay.Player.TWO">
+<code class="descname">TWO</code><em class="property"> = 2</em><a class="headerlink" href="#ultimate_ttt.gameplay.Player.TWO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ultimate_ttt.gameplay.PlayerMove">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">PlayerMove</code><span class="sig-paren">(</span><em>player</em>, <em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#PlayerMove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.PlayerMove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.gameplay.Move" title="ultimate_ttt.gameplay.Move"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.gameplay.Move</span></code></a></p>
+<p>A move by a specific player</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ultimate_ttt.gameplay.is_col_won">
+<code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">is_col_won</code><span class="sig-paren">(</span><em>board</em>, <em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#is_col_won"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.is_col_won" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ultimate_ttt.gameplay.is_diagonal_won">
+<code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">is_diagonal_won</code><span class="sig-paren">(</span><em>board</em>, <em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#is_diagonal_won"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.is_diagonal_won" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ultimate_ttt.gameplay.is_row_won">
+<code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">is_row_won</code><span class="sig-paren">(</span><em>board</em>, <em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#is_row_won"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.is_row_won" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ultimate_ttt.gameplay.is_winning_move">
+<code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">is_winning_move</code><span class="sig-paren">(</span><em>board</em>, <em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#is_winning_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.is_winning_move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ultimate_ttt.errors">
+<span id="ultimate-ttt-errors-module"></span><h2>ultimate_ttt.errors module<a class="headerlink" href="#module-ultimate_ttt.errors" title="Permalink to this headline">¶</a></h2>
+<p>Errors for the Ultimate TicTacToe Engine</p>
+<dl class="exception">
+<dt id="ultimate_ttt.errors.BoardNotFinishedError">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">BoardNotFinishedError</code><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#BoardNotFinishedError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.BoardNotFinishedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ultimate_ttt.errors.Error">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">Error</code><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Base class for exceptions</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ultimate_ttt.errors.MoveInFinishedBoardError">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveInFinishedBoardError</code><span class="sig-paren">(</span><em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveInFinishedBoardError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveInFinishedBoardError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ultimate_ttt.errors.MoveInPlayedCellError">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveInPlayedCellError</code><span class="sig-paren">(</span><em>move</em>, <em>board_coords=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveInPlayedCellError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveInPlayedCellError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ultimate_ttt.errors.MoveNotOnNextBoardError">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveNotOnNextBoardError</code><span class="sig-paren">(</span><em>board_coords</em>, <em>next_board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveNotOnNextBoardError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveNotOnNextBoardError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ultimate_ttt.errors.MoveOutsideMainBoardError">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveOutsideMainBoardError</code><span class="sig-paren">(</span><em>board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveOutsideMainBoardError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveOutsideMainBoardError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ultimate_ttt.errors.MoveOutsideSubBoardError">
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveOutsideSubBoardError</code><span class="sig-paren">(</span><em>move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveOutsideSubBoardError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveOutsideSubBoardError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ultimate_ttt">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ultimate_ttt" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Bharat Reddy, Victor Darvariu.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
