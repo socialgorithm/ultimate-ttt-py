@@ -5,7 +5,7 @@ Ultimate TicTacToe - Python Game Engine
 
 This is a python game engine that players (and the `Ultimate TicTacToe Server`_) use to play Ultimate TicTacToe games.
 
-Documentation can be found on our ReadTheDocs_ page.
+Documentation can be found on our `ReadTheDocs page`_.
 
 .. |Travis| image:: https://travis-ci.org/socialgorithm/ultimate-ttt-py.svg?branch=master
     :target: https://travis-ci.org/socialgorithm/ultimate-ttt-py
@@ -15,4 +15,4 @@ Documentation can be found on our ReadTheDocs_ page.
     :target: https://coveralls.io/github/socialgorithm/ultimate-ttt-py?branch=master
 
 .. _Ultimate TicTacToe Server: https://github.com/socialgorithm/ultimate-ttt-server
-.. _ReadTheDocs: http://ultimate-ttt-py.readthedocs.io/en/latest/
+.. _ReadTheDocs page: http://ultimate-ttt-py.readthedocs.io/en/latest/
