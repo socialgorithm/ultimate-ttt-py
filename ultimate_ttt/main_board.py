@@ -94,6 +94,26 @@ class MainBoard(object):
         """
         return self._add_move(board_coords, PlayerMove(Player.OPPONENT, move))
 
+    def get_valid_boards(self):
+        """Returns all board co-ordinates that are valid for the next move
+
+        Returns:
+            Array of valid board co-ordinates (Row, Col), e.g. [(2, 2),(1, 1)]
+        """
+        if self.next_board_coords is not None:
+            return [self.next_board_coords]
+        else:
+            available_boards = []
+            row_num = 0
+            for row in self._board:
+                col_num = 0
+                for sub_board in row:
+                    if not sub_board.is_finished:
+                        available_boards.append(BoardCoords(row_num, col_num))
+                    col_num += 1
+                row_num += 1
+            return available_boards
+
     def is_valid_board_for_next_move(self, board_coords):
         """Whether this is a valid board for the next move
 
