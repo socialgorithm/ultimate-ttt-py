@@ -53,6 +53,13 @@ def test_whenNewMoveIsNotOnGameNextBoardThenExceptionRaised():
     with pytest.raises(MoveNotOnNextBoardError):
         board.add_opponent_move(BoardCoords(1, 0), Move(1, 1))
 
+def test_whenNextBoardIsAvailableThenGetValidBoardsReturnsOnlyThatBoard():
+    board = MainBoard().add_my_move(BoardCoords(0, 0), Move(2, 2))
+
+    #Only valid board now should be 2, 2
+    assert len(board.get_valid_boards()) == 1
+    assert board.get_valid_boards()[0] == BoardCoords(2, 2)
+
 def test_whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
     main_board = MainBoard()
     #Force some sub_board plays to finish a board
@@ -69,6 +76,26 @@ def test_whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
     assert main_board.next_board_coords == None
     assert main_board.is_valid_board_for_next_move(BoardCoords(1, 1)) == True
     main_board.add_opponent_move(BoardCoords(0, 0), Move(1, 1))
+
+def test_whenNextBoardIsFinishedThenGetValidBoardsReturnsAllAvailableBoards():
+    main_board = MainBoard()
+    #Force some sub_board plays to finish a board
+    finished_sub_board = main_board._board[2][2]\
+                                    .add_my_move(Move(0, 0))\
+                                    .add_my_move(Move(1, 1))\
+                                    .add_my_move(Move(2, 2))
+
+    #Set that sub-board where the next_board_coords will be
+    main_board._board[2][2] = finished_sub_board
+    #Play a move that will make the finished board the next board (Move 2, 2)
+    main_board = main_board.add_my_move(BoardCoords(0, 0), Move(2, 2))
+    #Playing anywhere is now allowed
+    available_boards = main_board.get_valid_boards()
+    expected_boards = [BoardCoords(0, 0), BoardCoords(0, 1), BoardCoords(0, 2),\
+                        BoardCoords(1, 0), BoardCoords(1, 1), BoardCoords(1, 2),\
+                        BoardCoords(2, 0), BoardCoords(2, 1)]
+    assert len(available_boards) == 8
+    assert available_boards == expected_boards
 
 def test_whenAllSubBoardsAreFinishedThenMainBoardIsFinished():
     main_board = MainBoard(3)
