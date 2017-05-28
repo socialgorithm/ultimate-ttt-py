@@ -127,8 +127,10 @@ class SubBoard(object):
     def get_valid_moves(self):
         """
         Returns:
-            All valid Moves, corresponding to non-played Cells in SubBoard
+            All valid Moves, corresponding to non-played cells in SubBoard. Empty if board is finished.
         """
+        if self.is_finished:
+            return []
         valid_moves = []
         for row_index in range(0, self._board_size):
             for col_index in range(0, self._board_size):

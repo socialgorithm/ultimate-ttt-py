@@ -32,6 +32,16 @@ def test_whenBoardInitializedThenAllSubBoardsInitialized():
         for sub_board in row:
             assert str(sub_board) == '0 0 0 \n0 0 0 \n0 0 0 \n'
 
+def test_whenSubBoardsArePlayedThenGetSubBoardReturnsCorrectly():
+    main_board = MainBoard(3)
+    main_board = force_sub_board_win(main_board, 0, 0, Player.ME)
+    sub_board = main_board.get_sub_board(BoardCoords(0, 0))
+    assert(sub_board.is_finished)
+    assert(sub_board.winner == Player.ME)
+
+    other_sub_board = main_board.get_sub_board(BoardCoords(0, 1))
+    assert(not other_sub_board.is_finished)
+
 def test_whenBoardNewThenBoardIsNotFinished():
     assert MainBoard().is_finished == False
 
@@ -77,6 +87,14 @@ def test_whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
     assert main_board.is_valid_board_for_next_move(BoardCoords(1, 1)) == True
     main_board.add_opponent_move(BoardCoords(0, 0), Move(1, 1))
 
+def test_whenMainBoardIsFinishedThenGetValidBoardsIsEmpty():
+    main_board = MainBoard()
+    main_board = force_sub_board_win(main_board, 0, 0, Player.ME)
+    main_board = force_sub_board_win(main_board, 1, 1, Player.ME)
+    main_board = force_sub_board_win(main_board, 2, 2, Player.ME)
+
+    assert len(main_board.get_valid_boards()) == 0
+
 def test_whenNextBoardIsFinishedThenGetValidBoardsReturnsAllAvailableBoards():
     main_board = MainBoard()
     #Force some sub_board plays to finish a board
@@ -90,12 +108,11 @@ def test_whenNextBoardIsFinishedThenGetValidBoardsReturnsAllAvailableBoards():
     #Play a move that will make the finished board the next board (Move 2, 2)
     main_board = main_board.add_my_move(BoardCoords(0, 0), Move(2, 2))
     #Playing anywhere is now allowed
-    available_boards = main_board.get_valid_boards()
-    expected_boards = [BoardCoords(0, 0), BoardCoords(0, 1), BoardCoords(0, 2),\
-                        BoardCoords(1, 0), BoardCoords(1, 1), BoardCoords(1, 2),\
-                        BoardCoords(2, 0), BoardCoords(2, 1)]
-    assert len(available_boards) == 8
-    assert available_boards == expected_boards
+    valid_boards = main_board.get_valid_boards()
+    assert len(valid_boards) == 8
+    assert valid_boards == [BoardCoords(0, 0), BoardCoords(0, 1), BoardCoords(0, 2),\
+                            BoardCoords(1, 0), BoardCoords(1, 1), BoardCoords(1, 2),\
+                            BoardCoords(2, 0), BoardCoords(2, 1)]
 
 def test_whenAllSubBoardsAreFinishedThenMainBoardIsFinished():
     main_board = MainBoard(3)
@@ -188,27 +205,6 @@ def test_whenBoardIsPrettyPrintedThenItIsRenderedCorrectly():
                             "0 0 0 | 0 0 0 | 2 0 0 \n"+\
                             "0 0 0 | 0 0 0 | 0 0 0 \n"+\
                             "0 0 0 | 0 0 0 | 0 0 0 \n"
-
-def test_whenBoardIsPlayedThenGetValidBoardsReturnsCorrectly():
-    main_board = MainBoard(3)
-    main_board = force_sub_board_win(main_board, 0, 0, Player.ME)
-    main_board = force_sub_board_win(main_board, 1, 1, Player.OPPONENT)
-
-    valid_boards = main_board.get_valid_boards()
-    assert(len(valid_boards) == 7)
-    assert(BoardCoords(0, 0) not in valid_boards)
-    assert(BoardCoords(1, 1) not in valid_boards)
-    assert(BoardCoords(2, 2) in valid_boards)
-
-def test_getSubBoardReturnsCorrectly():
-    main_board = MainBoard(3)
-    main_board = force_sub_board_win(main_board, 0, 0, Player.ME)
-    sub_board = main_board.get_sub_board(BoardCoords(0, 0))
-    assert(sub_board.is_finished)
-    assert(sub_board.winner == Player.ME)
-
-    other_sub_board = main_board.get_sub_board(BoardCoords(0, 1))
-    assert(not other_sub_board.is_finished)
 
 def force_sub_board_win(main_board, board_row, board_col, player):
     return main_board._copy_applying_move(BoardCoords(board_row, board_col), PlayerMove(player, Move(0, 0)))\
