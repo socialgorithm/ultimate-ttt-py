@@ -8,7 +8,7 @@ setup(name='ultimate_ttt',
       author='Bharat Reddy',
       author_email='me@bharatreddy.com',
       url='https://github.com/socialgorithm/ultimate-ttt-py',
-      packages=['ultimate_ttt'],
+      packages=['ultimate_ttt', 'ultimate_ttt_player'],
 	  setup_requires=['pytest-runner'],
 	  tests_require=['pytest']
      )

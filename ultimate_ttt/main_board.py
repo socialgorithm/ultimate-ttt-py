@@ -159,7 +159,7 @@ class MainBoard(object):
     ### Private functions
 
     def _add_move(self, board_coords, player_move):
-        """Adds a move by a player to a deep copy of the current board, returning the copy
+        """Adds a move by a ultimate_ttt_player to a deep copy of the current board, returning the copy
 
         Args:
             player_main_board_move: Player, co-ordinates of the SubBoard, and intended move on that SubBoard
@@ -212,7 +212,7 @@ class MainBoard(object):
         """Returns this main board in the form of a board of cells
 
         Each cell represents a sub-board of this board, with
-        `cell.played_by` set to the player that won the board (Player.NONE if tied)
+        `cell.played_by` set to the ultimate_ttt_player that won the board (Player.NONE if tied)
         """
 
         return [[Cell(sub_board.winner) if sub_board.is_finished else Cell(Player.NONE) for sub_board in row] for row in self._board]

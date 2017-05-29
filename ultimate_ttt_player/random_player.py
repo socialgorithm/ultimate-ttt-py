@@ -1,13 +1,15 @@
-from ultimate_ttt.main_board import MainBoard
-from ultimate_ttt.gameplay import *
-
-import sys
 import random
+
+from ultimate_ttt.gameplay import *
+from ultimate_ttt.main_board import MainBoard
+from ultimate_ttt_player.ultimate_ttt_player import UltimateTTTPlayer
 
 global random_player
 
-class Random(object):
+
+class Random(UltimateTTTPlayer):
     def __init__(self, board_size=3):
+        UltimateTTTPlayer.__init__(self)
         self.board_size = board_size
         self.player = Player.ME
         self.opponent = Player.OPPONENT
@@ -19,8 +21,8 @@ class Random(object):
     def add_opponent_move(self, board, opponent_move):
         self.game = self.game.add_opponent_move(board, opponent_move)
 
-    def add_move(self, board, move):
-        self.game = self.game.add_move(board, move)
+    def add_my_move(self, board, move):
+        self.game = self.game.add_my_move(board, move)
 
     def get_my_move(self):
         """
@@ -30,6 +32,17 @@ class Random(object):
         next_board = self.game.get_sub_board(next_board_coords)
         move = self._pick_random_move(next_board)
         return next_board_coords, move
+
+    @property
+    def player_name(self):
+        return 'random'
+
+    def wait(self):
+        return
+
+    @property
+    def is_current_match_finished(self):
+        return self.game.is_finished
 
     def _pick_next_board(self):
         """
@@ -47,33 +60,3 @@ class Random(object):
         """
         valid_moves = board.get_valid_moves()
         return random.choice(valid_moves)
-
-
-def main():
-    for line in sys.stdin:
-        process_input(line.strip())
-
-def process_input(line):
-    if line == "init":
-        random_player.initialize()
-    elif line == "waiting":
-        return
-    elif line == "move":
-        write_move(random_player.get_my_move())
-    elif line.startswith("opponent"):
-        received_move = line.split(" ")[1]
-        board_coords_str, opponent_move_str = received_move.split(";")
-        board_coords = BoardCoords(*map(int, board_coords_str.split(",")))
-        opponent_move = Move(*map(int, opponent_move_str.split(",")))
-        random_player.add_opponent_move(board_coords, opponent_move)
-        write_move(random_player.get_my_move())
-
-def write_move(move):
-    next_board_coords = move[0]
-    next_move = move[1]
-    print("%d,%d;%d,%d" % (next_board_coords.row, next_board_coords.col, next_move.row, next_move.col))
-
-
-if __name__ == "__main__":
-    random_player = Random()
-    main()
