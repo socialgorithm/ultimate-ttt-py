@@ -3,6 +3,12 @@ import re
 
 from ultimate_ttt import MainBoard, BoardCoords, Move, Player, PlayerMove, is_diagonal_won, is_col_won, is_row_won
 
+def whenMoveIsPrintedThenItIsPretty():
+    assert print(Move(1,2)) is "(1,2)"
+
+def whenPlayerMoveIsPrintedThenItIsPretty():
+    assert print(PlayerMove(Player.ME, Move(1,2)) is "(1,2) by Player.ME")
+
 def test_row_col_checks_work():
     main_board = MainBoard()
 
