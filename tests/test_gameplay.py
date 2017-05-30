@@ -6,7 +6,7 @@ from ultimate_ttt import MainBoard, BoardCoords, Move, Player, PlayerMove, is_di
 def test_row_col_checks_work():
     main_board = MainBoard()
 
-    for game_event in get_game_events('tests/logs/diag_fail.log'):
+    for game_event in get_game_events('tests/logs/diag_fail.gamelog'):
         main_board = main_board._add_move(game_event[0], game_event[1])
 
     assert is_diagonal_won(main_board._board[0][1]._board, PlayerMove(Player.OPPONENT, Move(1,1))) is True
