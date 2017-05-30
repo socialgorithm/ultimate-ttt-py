@@ -19,7 +19,7 @@ class MoveNotOnNextBoardError(Error):
         self.next_board_coords = next_board_coords
 
     def __str__(self):
-        return "Next board to play is "+self.next_board_coords+", but player played "+self.coords
+        return "Next board to play is "+self.next_board_coords+", but ultimate_ttt_player played "+self.coords
 
 class MoveOutsideSubBoardError(Error):
     def __init__(self, move):

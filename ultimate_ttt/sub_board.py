@@ -57,7 +57,7 @@ class SubBoard(object):
         return self._winner
 
     def add_my_move(self, move):
-        """Adds a move for the current player
+        """Adds a move for the current ultimate_ttt_player
 
         Args:
             move: Move co-ordinates
@@ -88,7 +88,7 @@ class SubBoard(object):
         return pretty_printed
 
     def add_move(self, player_move):
-        """Adds a move by a player to a deep copy of the board, returning the copy
+        """Adds a move by a ultimate_ttt_player to a deep copy of the board, returning the copy
 
         Player may find it easier to use the :code:`add_my_move` and
         :code:`add_opponent_move` convenience methods so they don't have to create
