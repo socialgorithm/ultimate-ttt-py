@@ -1,4 +1,5 @@
 import random
+import sys
 
 from ultimate_ttt.gameplay import *
 from ultimate_ttt.main_board import MainBoard

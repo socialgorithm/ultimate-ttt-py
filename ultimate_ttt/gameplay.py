@@ -30,6 +30,9 @@ class PlayerMove(Move):
         super().__init__(move.row, move.col)
         self.player = player
 
+    def __str__(self):
+        return "("+str(self.row)+","+str(self.col)+")"+" by "+str(self.player)
+
 class BoardCoords(Move):
     """Convenience wrapper to represent MainBoard co-ordinates (referencing a SubBoard)"""
     def __init__(self, main_board_row, main_board_col):
@@ -42,10 +45,7 @@ def is_winning_move(board, player_move):
 
 def is_row_won(board, player_move):
     """Whether the row of the ultimate_ttt_player move is won by the ultimate_ttt_player of the move"""
-    for cell in board[player_move.row]:
-        if not cell.played_by == player_move.player:
-            return False
-    return True
+    return is_cell_range_played_by(board[player_move.row], player_move.player)
 
 def is_col_won(board, player_move):
     """Whether the column of the ultimate_ttt_player move is won by the ultimate_ttt_player of the move"""
@@ -55,27 +55,29 @@ def is_col_won(board, player_move):
     return True
 
 def is_diagonal_won(board, player_move):
-    """Whether either diagonal from the cell of the ultimate_ttt_player move is won by the ultimate_ttt_player"""
-    ltr_diagonal = [[0,0],[1,1],[2,2]]
-    rtl_diagonal = [[0,2],[1,1],[2,0]]
+    """Whether either diagonal from the cell of the player move is won by the player"""
 
-    move = [player_move.row, player_move.col]
+    return is_ltr_diagonal_won(board, player_move) or is_rtl_diagonal_won(board, player_move)
 
-    move_was_in_diagonal = False
+def is_ltr_diagonal_won(board, player_move):
+    """Whether the left to right (0,0) to (2,2) diagonal has been won by the given player"""
+    cells = [board[0][0],board[1][1],board[2][2]]
 
-    if move in ltr_diagonal:
-        move_was_in_diagonal = True
-        for (test_row, test_col) in ltr_diagonal:
-            if not board[test_row][test_col].played_by == player_move.player:
-                return False
+    return is_cell_range_played_by(cells, player_move.player)
 
-    if move in rtl_diagonal:
-        move_was_in_diagonal = True
-        for (test_row, test_col) in rtl_diagonal:
-            if not board[test_row][test_col].played_by == player_move.player:
-                return False
+def is_rtl_diagonal_won(board, player_move):
+    """Whether the left to right (2,0) to (0,2) diagonal has been won by the given player"""
+    cells = [board[2][0],board[1][1],board[0][2]]
 
-    if move_was_in_diagonal:
-        return True
+    return is_cell_range_played_by(cells, player_move.player)
 
-    return False
+def is_cell_range_played_by(cells, player):
+    """Whether the given list of cells are all played by the given player
+
+    Args:
+        cells: The list of cells to check
+        player: The player to look for
+    """
+    if any(not cell.played_by == player for cell in cells):
+        return False
+    return True
