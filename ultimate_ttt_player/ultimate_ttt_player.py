@@ -66,9 +66,16 @@ class UltimateTTTPlayer(metaclass=ABCMeta):
             opponent_move = Move(*map(int, opponent_move_str.split(",")))
             self.add_opponent_move(board_coords, opponent_move)
             self.logger.debug('ultimate_ttt_player: processed opponent move...')
-
             if not self.is_current_match_finished:
-                self.write_move(self.get_my_move())
+                self.logger.debug('ultimate_ttt_player: responding to opponent move...')
+                board_coords, move = self.get_my_move()
+                self.add_my_move(board_coords, move)
+                self.write_move((board_coords, move))
+            else:
+                self.logger.debug('ultimate_ttt_player: current match is finished...')
+                sys.stdout.flush()
+                return
+
         else:
             self.logger.error('ultimate_ttt_player: received bad input: [%s]' % line)
 
