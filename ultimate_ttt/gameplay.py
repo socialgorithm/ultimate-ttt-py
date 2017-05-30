@@ -25,7 +25,7 @@ class Move(object):
         return "("+str(self.row)+","+str(self.col)+")"
 
 class PlayerMove(Move):
-    """A move by a specific ultimate_ttt_player"""
+    """A move by a specific player"""
     def __init__(self, player, move):
         super().__init__(move.row, move.col)
         self.player = player
@@ -39,16 +39,16 @@ class BoardCoords(Move):
         super().__init__(main_board_row, main_board_col)
 
 def is_winning_move(board, player_move):
-    """Whether the given ultimate_ttt_player move is a winning move"""
+    """Whether the given player move is a winning move"""
     return (is_row_won(board, player_move) or is_col_won(board, player_move) or
                 is_diagonal_won(board, player_move))
 
 def is_row_won(board, player_move):
-    """Whether the row of the ultimate_ttt_player move is won by the ultimate_ttt_player of the move"""
+    """Whether the row of the player move is won by the player of the move"""
     return is_cell_range_played_by(board[player_move.row], player_move.player)
 
 def is_col_won(board, player_move):
-    """Whether the column of the ultimate_ttt_player move is won by the ultimate_ttt_player of the move"""
+    """Whether the column of the player move is won by the player of the move"""
     for row in board:
         if not row[player_move.col].played_by == player_move.player:
             return False
