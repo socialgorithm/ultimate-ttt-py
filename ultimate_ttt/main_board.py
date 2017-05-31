@@ -100,7 +100,13 @@ class MainBoard(object):
         return self._board[row][col]
 
     def get_valid_boards(self):
-        """Returns all board co-ordinates that are valid for the next move. Empty if board is finished.
+        """Returns all board co-ordinates that are valid for the next move.
+
+		If the opponents previous move co-ordinates (according to the rules) \
+        restrict you to a single sub-board, then this will return only that board. \
+        If not, it will return all boards that are valid for moves. 
+
+		Returns Empty if board is finished.
 
         Returns:
             Array of valid board co-ordinates (Row, Col), e.g. [BoardCoords(2, 2),BoardCoords(1, 1)]
