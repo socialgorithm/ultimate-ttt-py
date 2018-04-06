@@ -237,3 +237,9 @@ class MainBoard(object):
             coords.col >= 0 and coords.col < len(self._board)):
             return True
         return False
+
+    def __iter__(self):
+        return self._board.__iter__()
+
+    def __getitem__(self, key):
+        return self._board[key]

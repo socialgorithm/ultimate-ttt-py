@@ -165,3 +165,9 @@ class SubBoard(object):
             True if the cell referenced by the move is already played, False otherwise
         """
         return self._board[move.row][move.col].is_played()
+
+    def __iter__(self):
+        return self._board.__iter__()
+
+    def __getitem__(self, key):
+        return self._board[key]
