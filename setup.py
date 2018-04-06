@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='ultimate_ttt',
-      version='1.0',
+      version='1.1',
       description='Game engine for Ultimate TicTacToe games',
       author='socialgorithm',
       author_email='hello@socialgorithm.org',
