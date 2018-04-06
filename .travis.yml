@@ -1,10 +1,16 @@
 language: python
 python:
-  - "3.5"
-  - "3.6"
+- '3.5'
+- '3.6'
 install:
-  - pip3 install coveralls
-script:
-  coverage run --source=ultimate_ttt setup.py test
-after_success:
-  coveralls
+- pip3 install coveralls
+script: coverage run --source=ultimate_ttt setup.py test
+after_success: coveralls
+deploy:
+  provider: pypi
+  user: reddyalready
+  password:
+    secure: OIURI4u6d3GAYdX6X0p4gXJT5Qd/pB4MnCWDppF8z+ipnr9qxYVOitxC7NLdTIZpXMDhdvm7u5o39AZTRf+dmI2FPRF9AQsDkLZ1xx1/oW6r4mqp3VpGXRduMaWJe7YcZkV2n4M8nrDqJ/4oCUonJyWWwkucW2ne2sS/JgotgduDowCm0XRI/MumIlTo9Mz42dq/Qyp1qidncXWGvKrthKFeIiNwIKD817+m/uFcPc7juc1RAHzk8U53S9neHJgkG4jv45/FXb4EuhLVwZ3GPUe0T5WrAL03i2fUW32+zbx+McOJ67ajOZCHn/6qfn4dje6qrJ/VPsMI7ZgdJ2qSBWC5IkPCwH0jIj6Wf1OA1nJQdAadsmlbH1ytMTMYgrquvoHCxgUmRJQ66m2o8R4tpje7OvFkGGdDBwkgsadWt/XN+/pn4+wQ1cbaeRNvP1YpZYOPhpr7qyvxRmyyKvvLYHRE/tifZ7CXroFEn/uNKBiQHbcxpq70X3ECJITpumEd8uoxvRdVfhIe5cd1UtjBZ5srpjxe6ul2dojcz0TBHbp1PiIet3r95bU7LcTEokkjlqv14DdgGIq6dfkHaBKxan7ZPuc/+Z2Sl3RKII0F6yPu7R4DgGuIdWzmqI6B42/nWiBkdvvyS75i8XLYwWAPwvEY1z0Z38v/gmMtJmCi5Lc=
+  on:
+    tags: true
+
