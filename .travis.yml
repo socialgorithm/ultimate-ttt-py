@@ -3,13 +3,11 @@ python:
 - '3.5'
 - '3.6'
 install:
-- pip3 install coveralls
+- pip install coveralls
 script: coverage run --source=ultimate_ttt setup.py test
 after_success: coveralls
 deploy:
   provider: pypi
   user: reddyalready
-  password:
-    secure: WOk8Sq+EsrebaGbf/d6OtRYmaEaDF7bBbbiqvDBD3jIz5EVIQjyf3kpQ04P4pFR2Duf3OEEk1RByciiQXDaI++Hl0esLp/jsAN/eB/UebPnXyQkpPLu1K9lLXMz2nRrZDgSIDWYyg7rXgoN7tPhziaNEJmYn4d46p1HhApZXhJLjy1An3s7/tGTsR1EmTFfKBgshaHl9ZRMJCtXYg5h9opjegEK/2LTrj88+vnjTd141gn+rdoj3PpJmt2XJj/tkQdrAMu1/hIk70bvkfV5DrETyZGb1chCDH1jPjPwGo0icJD7RHE+CDz4R151+nM3B08l1G+V7YNF5T6JaAp+Ai8bhIf50BNS6sE7SRsE7y8Tx7xtSa3AO55VgO4ES/7IHE2O3vEQzses+ZIzWM7HZchw9rTXCGJYmrOktwj/wUXREpK98klRUziIej7NsfWgbXJxfWDVqPsyLYf12TuqlY+8mNoY7SJ6TjHIj7Gmr3fNRWIsksKQ880U1Vd9k5ffnHu0FZEjcGhPpS0qqvbhshgLyhwZKi7cC5NWOEUOj3TRXAkrgfdC204nXfoEQ+yqHn3WA9iMj9Qt6B6b7HZPp6i8VAn1dbx29aTq6Y/4X+wLzK3M8k8UrSmIoZD4D5QMxaB/NhKvwPBEUJq/tBKHQ9yMwitIBUHEVYkNccmGgR9k=
   on:
     tags: true

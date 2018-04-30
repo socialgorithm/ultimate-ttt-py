@@ -2,11 +2,12 @@ from copy import deepcopy
 
 from .sub_board import SubBoard
 from .cell import Cell
-from .gameplay import Player, PlayerMove, BoardCoords
-from .gameplay import is_winning_move
-from .errors import MoveOutsideMainBoardError, MoveNotOnNextBoardError,\
-                    BoardNotFinishedError, MoveInFinishedBoardError,\
-                    MoveInPlayedCellError
+from .gameplay import Player, MainBoardCoords
+from .gameplay import did_move_win
+from .errors import MoveOutsideMainBoardError, MoveNotOnNextBoardError, \
+    BoardNotFinishedError, MoveInFinishedBoardError, \
+    MoveInPlayedCellError
+
 
 class MainBoard(object):
     """An Ultimate TicTacToe board, containing several SubBoards where players play
@@ -29,36 +30,36 @@ class MainBoard(object):
 
     """
 
-    def __init__(self, board_size = 3):
+    def __init__(self, board_size=3):
         if not isinstance(board_size, int) or not board_size == 3:
             raise ValueError("Size must be integer of size 3 (for now)")
 
         self._board_size = board_size
         self._board = [
-                [SubBoard() for board_col in range(board_size)]
-                for board_row in range(board_size)
-            ]
+            [SubBoard() for board_col in range(board_size)]
+            for board_row in range(board_size)
+        ]
 
         self._next_player = Player.NONE
-        self._next_board_coords = None
+        self._sent_to_sub_board_coords = None
 
         self._is_finished = False
         self._winner = Player.NONE
 
     @property
-    def next_board_coords(self):
+    def sent_to_sub_board_coords(self):
         """The next board to play on. None if the next move can be on any board"""
-        return self._next_board_coords
+        return self._sent_to_sub_board_coords
 
     @property
     def is_finished(self):
         """Whether the board is finished (tied, won or lost)"""
-        if self._is_finished == True:
+        if self._is_finished:
             return True
 
         for row in self._board:
             for sub_board in row:
-                if sub_board.is_finished == False:
+                if not sub_board.is_finished:
                     return False
 
         return True
@@ -70,49 +71,49 @@ class MainBoard(object):
             raise BoardNotFinishedError
         return self._winner
 
-    def add_my_move(self, board_coords, move):
+    def add_my_move(self, main_board_coords, sub_board_coords):
         """Adds your move to the specified sub-board
 
         Args:
-            board_coords: The co-ordinates (row, column) of the SubBoard to play on
+            main_board_coords: The co-ordinates (row, column) of the SubBoard to play on
             move: The move (row, column) to make on the SubBoard
 
         Returns:
             A new MainBoard instance with the move applied
         """
-        return self._add_move(board_coords, PlayerMove(Player.ME, move))
+        return self._add_move(main_board_coords, sub_board_coords, Player.ME)
 
-    def add_opponent_move(self, board_coords, move):
+    def add_opponent_move(self, main_board_coords, sub_board_coords):
         """Adds the opponent's move to the specified sub-board
 
         Args:
-            board_coords: The co-ordinates (row, column) of the SubBoard to play on
-            move: The move (row, column) to make on the SubBoard
+            main_board_coords: The co-ordinates (row, column) of the SubBoard to play on
+            sub_board_coords: The move (row, column) to make on the SubBoard
 
         Returns:
             A new MainBoard instance with the move applied
         """
-        return self._add_move(board_coords, PlayerMove(Player.OPPONENT, move))
+        return self._add_move(main_board_coords, sub_board_coords, Player.OPPONENT)
 
-    def get_sub_board(self, board_coords):
-        row = board_coords.row
-        col = board_coords.col
+    def get_sub_board(self, main_board_coords):
+        row = main_board_coords.row
+        col = main_board_coords.col
         return self._board[row][col]
 
-    def get_valid_boards(self):
+    def get_playable_sub_board_coords(self):
         """Returns all board co-ordinates that are valid for the next move.
 
-		If the opponents previous move co-ordinates (according to the rules) \
-        restrict you to a single sub-board, then this will return only that board. \
+        If the opponents previous move co-ordinates (according to the rules)
+        restrict you to a single sub-board, then this will return only that board.
         If not, it will return all boards that are valid for moves. 
 
-		Returns Empty if board is finished.
+        Returns Empty if board is finished.
 
         Returns:
-            Array of valid board co-ordinates (Row, Col), e.g. [BoardCoords(2, 2),BoardCoords(1, 1)]
+            Array of valid board co-ordinates (Row, Col), e.g. [SubBoardCoords(2, 2),SubBoardCoords(1, 1)]
         """
-        if self.next_board_coords is not None:
-            return [self.next_board_coords]
+        if self.sent_to_sub_board_coords is not None:
+            return [self.sent_to_sub_board_coords]
         else:
             if self.is_finished:
                 return []
@@ -120,51 +121,50 @@ class MainBoard(object):
             for row_index in range(0, self._board_size):
                 for col_index in range(0, self._board_size):
                     if not self._board[row_index][col_index].is_finished:
-                        available_boards.append(BoardCoords(row_index, col_index))
+                        available_boards.append(MainBoardCoords(row_index, col_index))
             return available_boards
 
-    def is_valid_board_for_next_move(self, board_coords):
+    def is_sub_board_playable(self, main_board_coords):
         """Whether this is a valid board for the next move
 
         Args:
-            board_coords: The co-ordinates (row, column) of the SubBoard to check
+            main_board_coords: The co-ordinates (row, column) of the SubBoard to check
         """
-        if self.next_board_coords == None:
+        if self.sent_to_sub_board_coords == None:
             return True
-        elif self.next_board_coords == board_coords:
+        elif self.sent_to_sub_board_coords == main_board_coords:
             return True
         return False
 
     def __str__(self):
         """Returns a pretty printed representation of the main board"""
         pretty_printed = ''
-        #TODO: Shouldn't access sub-board private var
+        # TODO: Shouldn't access sub-board private var
         board_size = len(self._board)
         board_size_range = range(board_size)
-        for (mb_idx,mb_row) in enumerate(self._board):
+        for (mb_idx, mb_row) in enumerate(self._board):
             for sub_board_row_num in board_size_range:
-                for (sb_idx,sub_board) in enumerate(mb_row):
+                for (sb_idx, sub_board) in enumerate(mb_row):
                     for cell in sub_board._board[sub_board_row_num]:
-                        pretty_printed += str(cell)+' '
-                    #Print vertical separator - if not last sub_board
-                    if(sb_idx < board_size - 1):
+                        pretty_printed += str(cell) + ' '
+                    # Print vertical separator - if not last sub_board
+                    if sb_idx < board_size - 1:
                         pretty_printed += '| '
                 pretty_printed += '\n'
-            #Print horizontal separators
-            #Only if this is not the last row
-            if(mb_idx < board_size - 1):
+            # Print horizontal separators
+            # Only if this is not the last row
+            if mb_idx < board_size - 1:
                 for (bm_idx, board_marker) in enumerate(board_size_range):
                     for cell_marker in board_size_range:
                         pretty_printed += '- '
-                    if(bm_idx < board_size - 1):
+                    if bm_idx < board_size - 1:
                         pretty_printed += '| '
                 pretty_printed += '\n'
 
         return pretty_printed
 
-    ### Private functions
-
-    def _add_move(self, board_coords, player_move):
+    # Private functions
+    def _add_move(self, main_board_coords, sub_board_coords, player):
         """Adds a move by a ultimate_ttt_player to a deep copy of the current board, returning the copy
 
         Args:
@@ -174,43 +174,43 @@ class MainBoard(object):
             A new MainBoard instance with the move applied and all properties calculated
         """
 
-        if self._is_finished == True:
-            raise MoveInFinishedBoardError(board_coords)
+        if self._is_finished:
+            raise MoveInFinishedBoardError(main_board_coords, player)
 
-        if not self._is_board_in_bounds(board_coords):
-            raise MoveOutsideMainBoardError(board_coords)
+        if not self._is_board_in_bounds(main_board_coords):
+            raise MoveOutsideMainBoardError(main_board_coords)
 
-        if not self.is_valid_board_for_next_move(board_coords):
-            raise MoveNotOnNextBoardError(board_coords, self._next_board_coords)
+        if not self.is_sub_board_playable(main_board_coords):
+            raise MoveNotOnNextBoardError(main_board_coords, self._sent_to_sub_board_coords)
 
-        return self._copy_applying_move(board_coords, player_move)
+        return self.copy_applying_move(main_board_coords, sub_board_coords, player)
 
-    def _copy_applying_move(self, board_coords, player_move):
-        #Apply the move to the sub board first to ensure it works
+    def copy_applying_move(self, main_board_coords, sub_board_coords, player):
+        # Apply the move to the sub board first to ensure it works
         try:
-            updated_sub_board = self._board[board_coords.row][board_coords.col]\
-                                    .add_move(player_move)
+            updated_sub_board = self._board[main_board_coords.row][main_board_coords.col] \
+                .add_move(sub_board_coords, player)
         except MoveInPlayedCellError as e:
-            raise MoveInPlayedCellError(player_move, board_coords) from e
+            raise MoveInPlayedCellError(player, sub_board_coords, main_board_coords) from e
 
-        #Copy the board so we can update it
-        #Maybe this should all go in the constructor/classmethod
+        # Copy the board so we can update it
+        # Maybe this should all go in the constructor/classmethod
         updated_main_board = deepcopy(self)
 
-        updated_main_board._board[board_coords.row][board_coords.col] = updated_sub_board
+        updated_main_board._board[main_board_coords.row][main_board_coords.col] = updated_sub_board
 
-        #Check that the next board to play is not finished
-        if not updated_main_board._board[player_move.row][player_move.col].is_finished:
-            updated_main_board._next_board_coords = BoardCoords(player_move.row, player_move.col)
+        # Check that the next board to play is not finished
+        if not updated_main_board._board[sub_board_coords.row][sub_board_coords.col].is_finished:
+            updated_main_board._sent_to_sub_board_coords = MainBoardCoords(sub_board_coords.row, sub_board_coords.col)
         else:
-            updated_main_board._next_board_coords = None
+            updated_main_board._sent_to_sub_board_coords = None
 
-        #Convert to board of cells format so we can reuse check logic
+        # Convert to board of cells format so we can reuse check logic
         cell_board = updated_main_board._as_cell_board()
 
-        if is_winning_move(cell_board, PlayerMove(player_move.player, board_coords)):
+        if did_move_win(cell_board, main_board_coords, player):
             updated_main_board._is_finished = True
-            updated_main_board._winner = player_move.player
+            updated_main_board._winner = player
 
         return updated_main_board
 
@@ -221,7 +221,8 @@ class MainBoard(object):
         `cell.played_by` set to the ultimate_ttt_player that won the board (Player.NONE if tied)
         """
 
-        return [[Cell(sub_board.winner) if sub_board.is_finished else Cell(Player.NONE) for sub_board in row] for row in self._board]
+        return [[Cell(sub_board.winner) if sub_board.is_finished else Cell(Player.NONE) for sub_board in row] for row in
+                self._board]
 
     def _is_board_in_bounds(self, coords):
         """Checks whether the given move is inside the boundaries of the main board
@@ -233,8 +234,7 @@ class MainBoard(object):
             True if the move is within the bounds of the main board, False otherwise
         """
 
-        if (coords.row >= 0 and coords.row < len(self._board) and
-            coords.col >= 0 and coords.col < len(self._board)):
+        if 0 <= coords.row < len(self._board) and 0 <= coords.col < len(self._board):
             return True
         return False
 

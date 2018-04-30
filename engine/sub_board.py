@@ -1,10 +1,11 @@
 from copy import deepcopy
 
 from .cell import Cell
-from .gameplay import Player, PlayerMove, Move
-from .gameplay import is_winning_move
-from .errors import MoveOutsideSubBoardError, MoveInPlayedCellError,\
-                    MoveInFinishedBoardError, BoardNotFinishedError
+from .gameplay import Player, SubBoardCoords
+from .gameplay import did_move_win
+from .errors import MoveOutsideSubBoardError, MoveInPlayedCellError, \
+    MoveInFinishedBoardError, BoardNotFinishedError
+
 
 class SubBoard(object):
     """A single game of TicTacToe (not ultimate). Several of these make up the Ultimate TTT game.
@@ -19,8 +20,8 @@ class SubBoard(object):
     Example:
     ::
         SubBoard(3) #Initialises a board of size 3
-            .add_my_move(Move(1, 1)) #Adds a move at 1, 1 and returns a SubBoard
-            .add_opponent_move(Move(2, 1)) #Adds a move to the last returned board
+            .add_my_move(SubBoardCoords(1, 1)) #Adds a move at 1, 1 and returns a SubBoard
+            .add_opponent_move(SubBoardCoords(2, 1)) #Adds a move to the last returned board
 
     Call :code:`str(SubBoard())` to get a pretty-printed representation of this board
 
@@ -28,15 +29,16 @@ class SubBoard(object):
         * Use a :code:`@classmethod` to initialize SubBoard and make it immutable internally
 
     """
-    def __init__(self, board_size = 3):
+
+    def __init__(self, board_size=3):
         if not isinstance(board_size, int) or not board_size == 3:
             raise ValueError("Size must be integer of size 3 (for now)")
 
         self._board_size = board_size
         self._board = [
-                [Cell() for board_col in range(board_size)]
-                for board_row in range(board_size)
-            ]
+            [Cell() for board_col in range(board_size)]
+            for board_row in range(board_size)
+        ]
 
         self._max_moves = board_size * board_size;
         self._moves_so_far = 0
@@ -56,69 +58,69 @@ class SubBoard(object):
             raise BoardNotFinishedError
         return self._winner
 
-    def add_my_move(self, move):
-        """Adds a move for the current ultimate_ttt_player
+    def add_my_move(self, sub_board_coords):
+        """Adds a move for the current player
 
         Args:
-            move: Move co-ordinates
+            sub_board_coords: Move co-ordinates
 
         Returns:
             A new SubBoard instance with the move applied
         """
-        return self.add_move(PlayerMove(Player.ME, move))
+        return self.add_move(sub_board_coords, Player.ME)
 
-    def add_opponent_move(self, move):
+    def add_opponent_move(self, sub_board_coords):
         """Adds a move for the opponent
 
         Args:
-            move: Move co-ordinates
+            sub_board_coords: Move co-ordinates
 
         Returns:
             A new SubBoard instance with the move applied
         """
-        return self.add_move(PlayerMove(Player.OPPONENT, move))
+        return self.add_move(sub_board_coords, Player.OPPONENT)
 
     def __str__(self):
         """Returns a pretty printed representation of this board"""
         pretty_printed = ''
         for row in self._board:
             for cell in row:
-                pretty_printed += str(cell)+' '
+                pretty_printed += str(cell) + ' '
             pretty_printed += '\n'
         return pretty_printed
 
-    def add_move(self, player_move):
+    def add_move(self, sub_board_coords, player):
         """Adds a move by a ultimate_ttt_player to a deep copy of the board, returning the copy
 
-        Player may find it easier to use the :code:`add_my_move` and
-        :code:`add_opponent_move` convenience methods so they don't have to create
-        PlayerMove objects
+        Player may find it easier to use the :func:`~add_my_move` and
+        :func:`~add_opponent_move` functions
 
         Args:
-            player_move: Player and intended move
+            sub_board_coords: The co-ordinates to make a move in on this sub-board
+            player: The player that made the move
 
         Returns:
             A new SubBoard instance with the move applied and all properties calculated
         """
-        if self.is_finished == True:
-            raise MoveInFinishedBoardError(player_move)
+        if self.is_finished:
+            raise MoveInFinishedBoardError(sub_board_coords, player)
 
-        if not(self._is_move_in_bounds(player_move)):
-            raise MoveOutsideSubBoardError(player_move)
+        if not (self._is_move_in_bounds(sub_board_coords)):
+            raise MoveOutsideSubBoardError(sub_board_coords)
 
-        if self._is_move_already_played(player_move):
-            raise MoveInPlayedCellError(player_move)
+        if self._is_move_already_played(sub_board_coords):
+            raise MoveInPlayedCellError(player, sub_board_coords)
 
-        #Copy the board so we can update it
-        #Maybe this should all go in the constructor/classmethod
+        # Copy the board so we can update it
+        # Maybe this should all go in the constructor/classmethod
         updated_sub_board = deepcopy(self)
 
-        updated_sub_board._board[player_move.row][player_move.col] = Cell(player_move.player)
+        updated_sub_board._board[sub_board_coords.row][sub_board_coords.col] = Cell(player)
         updated_sub_board._moves_so_far += 1
 
-        if is_winning_move(updated_sub_board._board, player_move):
+        if did_move_win(updated_sub_board._board, sub_board_coords, player):
             updated_sub_board._is_finished = True
-            updated_sub_board._winner = player_move.player
+            updated_sub_board._winner = player
         elif updated_sub_board._moves_so_far == updated_sub_board._max_moves:
             updated_sub_board._is_finished = True
 
@@ -136,11 +138,10 @@ class SubBoard(object):
         for row_index in range(0, self._board_size):
             for col_index in range(0, self._board_size):
                 if not self._board[row_index][col_index].is_played():
-                    valid_moves.append(Move(row_index, col_index))
+                    valid_moves.append(SubBoardCoords(row_index, col_index))
         return valid_moves
 
-    ### Private functions
-
+    # Private functions
     def _is_move_in_bounds(self, move):
         """Checks whether the given move is inside the boundaries of this board
 
@@ -150,8 +151,7 @@ class SubBoard(object):
         Returns:
             True if the move is within the bounds of this board, False otherwise
         """
-        if (move.row >= 0 and move.row < len(self._board) and
-            move.col >= 0 and move.col < len(self._board)):
+        if 0 <= move.row < len(self._board) and 0 <= move.col < len(self._board):
             return True
         return False
 

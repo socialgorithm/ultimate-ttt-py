@@ -228,13 +228,13 @@ move: The move (row, column) to make on the SubBoard</dd>
 </dd></dl>
 
 <dl class="method">
-<dt id="ultimate_ttt.main_board.MainBoard.is_valid_board_for_next_move">
-<code class="descname">is_valid_board_for_next_move</code><span class="sig-paren">(</span><em>board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/main_board.html#MainBoard.is_valid_board_for_next_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.is_valid_board_for_next_move" title="Permalink to this definition">¶</a></dt>
+<dt id="ultimate_ttt.main_board.MainBoard.is_sub_board_playable">
+<code class="descname">is_sub_board_playable</code><span class="sig-paren">(</span><em>board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/main_board.html#MainBoard.is_sub_board_playable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.is_sub_board_playable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="ultimate_ttt.main_board.MainBoard.next_board_coords">
-<code class="descname">next_board_coords</code><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.next_board_coords" title="Permalink to this definition">¶</a></dt>
+<dt id="ultimate_ttt.main_board.MainBoard.sent_to_sub_board_coords">
+<code class="descname">sent_to_sub_board_coords</code><a class="headerlink" href="#ultimate_ttt.main_board.MainBoard.sent_to_sub_board_coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>The next board to play on. None if the next move can be on any board</p>
 </dd></dl>
 
@@ -346,8 +346,8 @@ PlayerMove objects</p>
 <div class="section" id="module-ultimate_ttt.gameplay">
 <span id="ultimate-ttt-gameplay-module"></span><h2>ultimate_ttt.gameplay module<a class="headerlink" href="#module-ultimate_ttt.gameplay" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="ultimate_ttt.gameplay.BoardCoords">
-<em class="property">class </em><code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">BoardCoords</code><span class="sig-paren">(</span><em>main_board_row</em>, <em>main_board_col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#BoardCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.BoardCoords" title="Permalink to this definition">¶</a></dt>
+<dt id="ultimate_ttt.gameplay.SubBoardCoords">
+<em class="property">class </em><code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">SubBoardCoords</code><span class="sig-paren">(</span><em>main_board_row</em>, <em>main_board_col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#SubBoardCoords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.SubBoardCoords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.gameplay.Move" title="ultimate_ttt.gameplay.Move"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.gameplay.Move</span></code></a></p>
 <p>Convenience wrapper to represent MainBoard co-ordinates (referencing a SubBoard)</p>
 </dd></dl>
@@ -414,8 +414,8 @@ PlayerMove objects</p>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="ultimate_ttt.gameplay.is_winning_move">
-<code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">is_winning_move</code><span class="sig-paren">(</span><em>board</em>, <em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#is_winning_move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.is_winning_move" title="Permalink to this definition">¶</a></dt>
+<dt id="ultimate_ttt.gameplay.did_move_win">
+<code class="descclassname">ultimate_ttt.gameplay.</code><code class="descname">did_move_win</code><span class="sig-paren">(</span><em>board</em>, <em>player_move</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/gameplay.html#did_move_win"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.gameplay.did_move_win" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -449,7 +449,7 @@ PlayerMove objects</p>
 
 <dl class="exception">
 <dt id="ultimate_ttt.errors.MoveNotOnNextBoardError">
-<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveNotOnNextBoardError</code><span class="sig-paren">(</span><em>board_coords</em>, <em>next_board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveNotOnNextBoardError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveNotOnNextBoardError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="descclassname">ultimate_ttt.errors.</code><code class="descname">MoveNotOnNextBoardError</code><span class="sig-paren">(</span><em>board_coords</em>, <em>sent_to_sub_board_coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ultimate_ttt/errors.html#MoveNotOnNextBoardError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ultimate_ttt.errors.MoveNotOnNextBoardError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ultimate_ttt.errors.Error" title="ultimate_ttt.errors.Error"><code class="xref py py-class docutils literal"><span class="pre">ultimate_ttt.errors.Error</span></code></a></p>
 </dd></dl>
 

@@ -1,5 +1,5 @@
 import pytest
-from ultimate_ttt import Cell, Player
+from engine import Cell, Player
 
 def test_whenCellIsNewThenCellIsPlayedByNone():
     assert Cell().played_by == Player.NONE

@@ -157,7 +157,7 @@
 
 <span class="kn">from</span> <span class="nn">.cell</span> <span class="k">import</span> <span class="n">Cell</span>
 <span class="kn">from</span> <span class="nn">.gameplay</span> <span class="k">import</span> <span class="n">Player</span><span class="p">,</span> <span class="n">PlayerMove</span>
-<span class="kn">from</span> <span class="nn">.gameplay</span> <span class="k">import</span> <span class="n">is_winning_move</span>
+<span class="kn">from</span> <span class="nn">.gameplay</span> <span class="k">import</span> <span class="n">did_move_win</span>
 <span class="kn">from</span> <span class="nn">.errors</span> <span class="k">import</span> <span class="n">MoveOutsideSubBoardError</span><span class="p">,</span> <span class="n">MoveInPlayedCellError</span><span class="p">,</span>\
                     <span class="n">MoveInFinishedBoardError</span><span class="p">,</span> <span class="n">BoardNotFinishedError</span>
 
@@ -270,7 +270,7 @@
         <span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_board</span><span class="p">[</span><span class="n">player_move</span><span class="o">.</span><span class="n">row</span><span class="p">][</span><span class="n">player_move</span><span class="o">.</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">player_move</span><span class="o">.</span><span class="n">player</span><span class="p">)</span>
         <span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_moves_so_far</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="n">is_winning_move</span><span class="p">(</span><span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_board</span><span class="p">,</span> <span class="n">player_move</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">did_move_win</span><span class="p">(</span><span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_board</span><span class="p">,</span> <span class="n">player_move</span><span class="p">):</span>
             <span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_is_finished</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_winner</span> <span class="o">=</span> <span class="n">player_move</span><span class="o">.</span><span class="n">player</span>
         <span class="k">elif</span> <span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_moves_so_far</span> <span class="o">==</span> <span class="n">updated_sub_board</span><span class="o">.</span><span class="n">_max_moves</span><span class="p">:</span>
