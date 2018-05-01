@@ -1,3 +1,5 @@
+#!/bin/bash
+
 from abc import ABCMeta, abstractmethod
 
 from engine.main_board import MainBoard
@@ -17,7 +19,7 @@ class UltimatePlayer(metaclass=ABCMeta):
         return self.main_board.is_finished
 
     def add_my_move(self, main_board_coords, sub_board_coords):
-        self.main_board.add_my_move(main_board_coords, sub_board_coords)
+        self.main_board = self.main_board.add_my_move(main_board_coords, sub_board_coords)
 
     def add_opponent_move(self, main_board_coords, sub_board_coords):
-        self.main_board.add_opponent_move(main_board_coords, sub_board_coords)
+        self.main_board = self.main_board.add_opponent_move(main_board_coords, sub_board_coords)

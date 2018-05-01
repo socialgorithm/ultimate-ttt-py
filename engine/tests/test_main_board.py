@@ -88,13 +88,13 @@ def test_whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
         .add_my_move(SubBoardCoords(1, 1)) \
         .add_my_move(SubBoardCoords(2, 2))
 
-    # Set that sub-board where the sent_to_sub_board_coords will be
+    # Set that sub-board where the sub_board_next_player_must_play will be
     main_board._board[2][2] = finished_sub_board
     # Play a move that will make the finished board the next board (Move 2, 2)
     main_board = main_board.add_my_move(MainBoardCoords(0, 0), SubBoardCoords(2, 2))
     # Playing anywhere is now allowed
-    assert main_board.sent_to_sub_board_coords == None
-    assert main_board.is_sub_board_playable(MainBoardCoords(1, 1)) == True
+    assert main_board.sub_board_next_player_must_play == None
+    assert main_board.is_playing_on_sub_board_allowed(MainBoardCoords(1, 1)) == True
     main_board.add_opponent_move(MainBoardCoords(0, 0), SubBoardCoords(1, 1))
 
 
@@ -115,7 +115,7 @@ def test_whenNextBoardIsFinishedThenGetValidBoardsReturnsAllAvailableBoards():
         .add_my_move(SubBoardCoords(1, 1)) \
         .add_my_move(SubBoardCoords(2, 2))
 
-    # Set that sub-board where the sent_to_sub_board_coords will be
+    # Set that sub-board where the sub_board_next_player_must_play will be
     main_board._board[2][2] = finished_sub_board
     # Play a move that will make the finished board the next board (Move 2, 2)
     main_board = main_board.add_my_move(MainBoardCoords(0, 0), SubBoardCoords(2, 2))

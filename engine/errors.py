@@ -17,12 +17,12 @@ class MoveOutsideMainBoardError(Error):
 
 
 class MoveNotOnNextBoardError(Error):
-    def __init__(self, main_board_coords, sent_to_sub_board_coords):
+    def __init__(self, main_board_coords, sub_board_next_player_must_play):
         self.main_board_coords = main_board_coords
-        self.sent_to_sub_board_coords = sent_to_sub_board_coords
+        self.sub_board_next_player_must_play = sub_board_next_player_must_play
 
     def __str__(self):
-        return "Next board to play is {0}, but player played {1}".format(self.sent_to_sub_board_coords,
+        return "Next board to play is {0}, but player played {1}".format(self.sub_board_next_player_must_play,
                                                                          self.main_board_coords)
 
 

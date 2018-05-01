@@ -9,6 +9,6 @@ setup(name='ultimate_ttt',
       author_email='hello@socialgorithm.org',
       url='https://github.com/socialgorithm/ultimate-ttt-py',
       packages=['engine'],
-	  setup_requires=['pytest-runner'],
-	  tests_require=['pytest']
-     )
+      setup_requires=['pytest-runner'],
+      tests_require=['pytest']
+      )

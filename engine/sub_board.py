@@ -126,10 +126,11 @@ class SubBoard(object):
 
         return updated_sub_board
 
-    def get_valid_moves(self):
+    def get_playable_coords(self):
         """
         Returns:
-            All valid Moves, corresponding to non-played cells in SubBoard. \
+            All valid SubBoardCoords that can be played (have not been played
+
             Empty if board is finished.
         """
         if self.is_finished:

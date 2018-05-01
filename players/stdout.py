@@ -2,18 +2,27 @@ import sys
 
 from abc import abstractmethod
 
-from engine import MainBoardCoords, SubBoardCoords
+from engine import MainBoardCoords, SubBoardCoords, MainBoard
 from players.player import UltimatePlayer
 
 
 class StdOutPlayer(UltimatePlayer):
+    def __init__(self):
+        super().__init__()
+
+    @abstractmethod
+    def initialize(self):
+        pass
 
     @abstractmethod
     def get_my_move(self):
         pass
 
     def process_input(self, line):
-        if line == "move":
+        if line == "init":
+            self.initialize()
+            return
+        elif line == "move":
             main_board_coords, sub_board_coords = self.get_my_move()
             self.add_my_move(main_board_coords, sub_board_coords)
             self.write_move(main_board_coords, sub_board_coords)

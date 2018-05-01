@@ -41,15 +41,15 @@ class MainBoard(object):
         ]
 
         self._next_player = Player.NONE
-        self._sent_to_sub_board_coords = None
+        self._sub_board_next_player_must_play = None
 
         self._is_finished = False
         self._winner = Player.NONE
 
     @property
-    def sent_to_sub_board_coords(self):
+    def sub_board_next_player_must_play(self):
         """The next board to play on. None if the next move can be on any board"""
-        return self._sent_to_sub_board_coords
+        return self._sub_board_next_player_must_play
 
     @property
     def is_finished(self):
@@ -110,10 +110,10 @@ class MainBoard(object):
         Returns Empty if board is finished.
 
         Returns:
-            Array of valid board co-ordinates (Row, Col), e.g. [SubBoardCoords(2, 2),SubBoardCoords(1, 1)]
+            Array of valid board co-ordinates (Row, Col), e.g. [MainBoardCoords(2, 2),MainBoardCoords(1, 1)]
         """
-        if self.sent_to_sub_board_coords is not None:
-            return [self.sent_to_sub_board_coords]
+        if self.sub_board_next_player_must_play is not None:
+            return [self.sub_board_next_player_must_play]
         else:
             if self.is_finished:
                 return []
@@ -124,15 +124,14 @@ class MainBoard(object):
                         available_boards.append(MainBoardCoords(row_index, col_index))
             return available_boards
 
-    def is_sub_board_playable(self, main_board_coords):
+    def is_playing_on_sub_board_allowed(self, main_board_coords):
         """Whether this is a valid board for the next move
 
         Args:
             main_board_coords: The co-ordinates (row, column) of the SubBoard to check
         """
-        if self.sent_to_sub_board_coords == None:
-            return True
-        elif self.sent_to_sub_board_coords == main_board_coords:
+        if self.sub_board_next_player_must_play is None or \
+                self.sub_board_next_player_must_play == main_board_coords:
             return True
         return False
 
@@ -168,7 +167,7 @@ class MainBoard(object):
         """Adds a move by a ultimate_ttt_player to a deep copy of the current board, returning the copy
 
         Args:
-            player_main_board_move: Player, co-ordinates of the SubBoard, and intended move on that SubBoard
+            main_board_coords: The location of the sub-board on the main board
 
         Returns:
             A new MainBoard instance with the move applied and all properties calculated
@@ -180,8 +179,8 @@ class MainBoard(object):
         if not self._is_board_in_bounds(main_board_coords):
             raise MoveOutsideMainBoardError(main_board_coords)
 
-        if not self.is_sub_board_playable(main_board_coords):
-            raise MoveNotOnNextBoardError(main_board_coords, self._sent_to_sub_board_coords)
+        if not self.is_playing_on_sub_board_allowed(main_board_coords):
+            raise MoveNotOnNextBoardError(main_board_coords, self._sub_board_next_player_must_play)
 
         return self.copy_applying_move(main_board_coords, sub_board_coords, player)
 
@@ -201,9 +200,9 @@ class MainBoard(object):
 
         # Check that the next board to play is not finished
         if not updated_main_board._board[sub_board_coords.row][sub_board_coords.col].is_finished:
-            updated_main_board._sent_to_sub_board_coords = MainBoardCoords(sub_board_coords.row, sub_board_coords.col)
+            updated_main_board._sub_board_next_player_must_play = MainBoardCoords(sub_board_coords.row, sub_board_coords.col)
         else:
-            updated_main_board._sent_to_sub_board_coords = None
+            updated_main_board._sub_board_next_player_must_play = None
 
         # Convert to board of cells format so we can reuse check logic
         cell_board = updated_main_board._as_cell_board()

@@ -119,7 +119,7 @@ def test_whenBoardIsPlayedThenGetValidMovesReturnsCorrectly():
                 .add_opponent_move(SubBoardCoords(1, 1))\
                 .add_my_move(SubBoardCoords(2, 1))
 
-    assert board.get_valid_moves() == \
+    assert board.get_playable_coords() == \
                         [SubBoardCoords(0, 1), SubBoardCoords(0, 2), \
                          SubBoardCoords(1, 0), SubBoardCoords(1, 2), \
                          SubBoardCoords(2, 0), SubBoardCoords(2, 2)]
@@ -131,7 +131,7 @@ def test_whenBoardIsFinishedThenGetValidMovesIsEmpty():
                         .add_opponent_move(SubBoardCoords(0, 2))\
                         .add_my_move(SubBoardCoords(2, 2))
 
-    assert len(board.get_valid_moves()) is 0
+    assert len(board.get_playable_coords()) is 0
 
 def test_whenBoardIsInProgressThenBoardIsNotFinished():
     assert SubBoard().add_my_move(SubBoardCoords(0, 0))\

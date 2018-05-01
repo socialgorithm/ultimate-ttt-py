@@ -2,42 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d450628-60d8-459d-8ba6-22eb14291af6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ultimate-ttt-py.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/errors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/tests/test_sub_board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/players/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/players/player.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/players/random.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/players/stdout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/players/tests/test_random.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ultimate-ttt-py.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/errors.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/errors.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/gameplay.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/gameplay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/main_board.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/main_board.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/sub_board.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/_modules/ultimate_ttt/sub_board.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/_build_html/source/ultimate_ttt.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build_html/source/ultimate_ttt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/logs/diag_fail.gamelog" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/logs/diag_fail.gamelog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_cell.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/test_cell.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_gameplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/test_gameplay.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_main_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/test_main_board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_sub_board.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ultimate_ttt/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ultimate_ttt/cell.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/cell.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ultimate_ttt/errors.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ultimate_ttt/gameplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/gameplay.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ultimate_ttt/main_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/main_board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ultimate_ttt/sub_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/sub_board.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run_player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/errors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/main_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/main_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/sub_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/sub_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/tests/test_main_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/test_main_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/tests/test_sub_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/test_sub_board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/players/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/players/random.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/random.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/players/stdout.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/stdout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/players/tests/test_random.py" beforeDir="false" afterPath="$PROJECT_DIR$/players/tests/test_random.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,18 +24,18 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/ultimate_ttt_py$setup.coverage" NAME="test Coverage Results" MODIFIED="1524791758685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ultimate_ttt_py$test.coverage" NAME="test Coverage Results" MODIFIED="1525109692801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ultimate_ttt_py$test.coverage" NAME="test Coverage Results" MODIFIED="1525216743013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ultimate_ttt_py$test_stdout.coverage" NAME="test_stdout Coverage Results" MODIFIED="1524784210121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/adapters/tests" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="random.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="random.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/players/random.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+            <state relative-caret-position="285">
+              <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,10 +44,34 @@
       <file leaf-file-name="player.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/players/player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+            <state relative-caret-position="150">
+              <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#13#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run_player.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_player.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#24#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/engine/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,8 +80,11 @@
       <file leaf-file-name="main_board.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine/main_board.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-974">
-              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+            <state relative-caret-position="235">
+              <caret line="123" column="86" selection-start-line="123" selection-start-column="86" selection-end-line="123" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,7 +92,7 @@
       <file leaf-file-name="errors.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine/errors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
+            <state relative-caret-position="283">
               <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
             </state>
           </provider>
@@ -99,7 +102,7 @@
         <entry file="file://$PROJECT_DIR$/engine/tests/test_gameplay.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -107,20 +110,8 @@
       <file leaf-file-name="sub_board.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine/sub_board.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-744">
-              <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_random.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/players/tests/test_random.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="195">
+              <caret line="131" column="36" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -128,8 +119,8 @@
       <file leaf-file-name="stdout.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/players/stdout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="81">
+              <caret line="11" selection-start-line="11" selection-end-line="14" selection-end-column="12" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -137,19 +128,35 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="test_random.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/players/tests/test_random.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Player</find>
       <find>self.board_coords</find>
-      <find>, board_coords</find>
+      <find />
       <find>([^_])board_coords</find>
       <find>move</find>
       <find>str(</find>
       <find>player_move</find>
       <find>PlayerMove,</find>
-      <find>, PlayerMove</find>
+      <find />
       <find>_copy_applying_move</find>
       <find>PlayerMove</find>
       <find>sub_board_coords.playe</find>
@@ -161,16 +168,25 @@
       <find>_board</find>
       <find>MoveInPlayedCell</find>
       <find>forced_sub</find>
+      <find>get_</find>
+      <find>sent_to_sub_board_coords</find>
+      <find>get_playable_</find>
+      <find>get_valid_moves</find>
+      <find>_sub_board_next</find>
+      <find>is_game_fini</find>
+      <find>print\(</find>
     </findStrings>
     <replaceStrings>
       <replace>self.main_board_coords</replace>
-      <replace>, main_board_coords</replace>
+      <replace />
       <replace>$1main_board_coords</replace>
       <replace>sub_board_coords</replace>
       <replace>board_coords</replace>
       <replace />
       <replace>copy_applying_move</replace>
       <replace>board</replace>
+      <replace>sub_board_next_player_must_play</replace>
+      <replace>get_playable_coords</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -184,16 +200,18 @@
         <option value="$PROJECT_DIR$/players/tests/base.py" />
         <option value="$PROJECT_DIR$/players/base.py" />
         <option value="$PROJECT_DIR$/adapters/stdout.py" />
-        <option value="$PROJECT_DIR$/players/player.py" />
         <option value="$PROJECT_DIR$/engine/gameplay.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/engine/tests/test_main_board.py" />
         <option value="$PROJECT_DIR$/engine/tests/test_gameplay.py" />
         <option value="$PROJECT_DIR$/engine/errors.py" />
-        <option value="$PROJECT_DIR$/engine/main_board.py" />
+        <option value="$PROJECT_DIR$/tests/test_run_player.py" />
         <option value="$PROJECT_DIR$/engine/sub_board.py" />
-        <option value="$PROJECT_DIR$/players/stdout.py" />
         <option value="$PROJECT_DIR$/players/tests/test_random.py" />
+        <option value="$PROJECT_DIR$/engine/main_board.py" />
+        <option value="$PROJECT_DIR$/run_player.py" />
+        <option value="$PROJECT_DIR$/players/player.py" />
+        <option value="$PROJECT_DIR$/players/stdout.py" />
         <option value="$PROJECT_DIR$/players/random.py" />
       </list>
     </option>
@@ -254,10 +272,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/players/tests" />
+      <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$/players" />
     </key>
   </component>
@@ -338,15 +358,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.32948717" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32948717" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32948717" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26108727" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32948717" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26824033" />
       <window_info anchor="right" id="R Packages" order="3" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="R Graphics" order="3" />
@@ -355,13 +376,13 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,11 +403,6 @@
           <url>file://$PROJECT_DIR$/adapters/stdout.py</url>
           <line>15</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/players/tests/test_random.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="7" />
@@ -419,9 +435,151 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/players/random.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+          <folding>
+            <element signature="e#13#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/main_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/tests/test_gameplay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/sub_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/tests/test_random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="40" lean-forward="true" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/stdout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+          <folding>
+            <element signature="e#13#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/main_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/tests/test_gameplay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/sub_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/stdout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/tests/test_random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -430,7 +588,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#13#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -543,27 +701,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/engine/tests/test_gameplay.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/engine/errors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/engine/main_board.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-974">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/Cellar/python3/3.6.3/Frameworks/Python.framework/Versions/3.6/lib/python3.6/subprocess.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -571,30 +708,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/players/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/player.py">
+    <entry file="file://$PROJECT_DIR$/engine/errors.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="283">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/tests/test_gameplay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/engine/sub_board.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-744">
-          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+        <state relative-caret-position="195">
+          <caret line="131" column="36" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/tests/test_random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/main_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="123" column="86" selection-start-line="123" selection-start-column="86" selection-end-line="123" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/players/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+          <folding>
+            <element signature="e#13#52#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/players/stdout.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        <state relative-caret-position="81">
+          <caret line="11" selection-start-line="11" selection-end-line="14" selection-end-column="12" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -603,20 +791,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/players/random.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="285">
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/players/tests/test_random.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>

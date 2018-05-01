@@ -1,38 +1,15 @@
-import pytest
-
-import subprocess
-import os
-import re
+from players import Random
 
 
-def init_random_player():
-    dir_path = os.path.dirname(os.path.dirname(__file__))
-    player_path = os.path.join(dir_path, "random.py")
-    _args = ("python " + player_path).split(" ")
-    return subprocess.Popen(args=_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+def test_it_returns_a_valid_move_coordinates():
+    assert_move_is_in_bounds(*Random().get_my_move())
 
 
-def test_whenPlayerIsSentMoveKeywordThenPlayerRespondsWithMove():
-    random_player = init_random_player()
-    player_response = random_player.communicate(b'move' + os.linesep.encode())[0].decode().strip()
-    _assertValidMove(player_response)
+def assert_move_is_in_bounds(main_board_coords, sub_board_coords):
+    assert_coords_are_in_bounds(main_board_coords)
+    assert_coords_are_in_bounds(sub_board_coords)
 
 
-def test_whenPlayerIsSentWaitingThenPlayerDoesNothing():
-    random_player = init_random_player()
-    player_response = random_player.communicate(b'init' + os.linesep.encode() + b'waiting' + os.linesep.encode())[
-        0].decode().strip()
-    assert (player_response == '')
-
-
-def test_whenPlayerIsSentOpponentMoveThenPlayerRespondsWithValidMove():
-    random_player = init_random_player()
-    player_response = \
-    random_player.communicate(b'init' + os.linesep.encode() + b'opponent 0,0;1,2' + os.linesep.encode())[
-        0].decode().strip()
-    _assertValidMove(player_response)
-
-
-def _assertValidMove(move):
-    move_pattern = re.compile(r'^\d,\d;\d,\d')
-    assert (move_pattern.match(move).group() == move)
+def assert_coords_are_in_bounds(board_coords):
+    assert 0 <= board_coords.row <= 2
+    assert 0 <= board_coords.col <= 2
