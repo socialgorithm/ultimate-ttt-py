@@ -1,30 +1,41 @@
-=======================================
-Ultimate TicTacToe - Python Game Engine
-=======================================
+================================================
+Ultimate TicTacToe - Python Player & Game Engine
+================================================
 
 |Travis| |PyPI| |Coverage|
 
-This is a python game engine that players (and the `Ultimate TicTacToe Server`_) use to play Ultimate TicTacToe games.
+This repo contains a sample player and game engine for our `Ultimate TicTacToe`_ hackathon.
 
-Users
-=====
+Welcome!
+========
 
-If you wish to use/implement this engine (e.g. in player/client or server), go to the `ReadTheDocs page`_.
+Welcome! You're probably here because you're currently participating in a hackathon we're running. We hope you enjoy this
+opportunity to code with abandon :)
 
-Developers
-==========
+You should already have read atleast the Intro and Rules at `Ultimate TTT Docs`_.
 
-The rest of this readme is for developers working on adding features to the game engine. If this is you:
+After that, get stuck in with: `Writing your first "intelligent" player`_ | `API Reference`_
+
+Contributors
+============
+
+The rest of this readme is if you're interested in contributing a player or even features to the game engine. If this is you:
 
 1. **Thank you**!
 2. Read on :)
 
+Pull Requests
+_____________
+
+To make a contribution, please fork this repository and open a pull request. We are grateful for anything that can be
+improved for the students taking part in our hackathons.
+
+In general, any new functionality or player should be tested to ensure it is behaving as expected.
+
 Running Tests
 -------------
 
-You should always, *always* be writing tests and then writing functionality that makes these pass.
-
-You (and Travis CI) can see that all our tests pass, run :code:`setup.py test`, or :code:`pytest` (after installing pytest) in the root directory.
+You (and Travis CI) can ensure our tests pass by running :code:`./setup.py test` in the root directory. Keep it that way!
 
 .. Images and Links
 
@@ -35,5 +46,7 @@ You (and Travis CI) can see that all our tests pass, run :code:`setup.py test`, 
 .. |Coverage| image:: https://coveralls.io/repos/github/socialgorithm/ultimate-ttt-py/badge.svg?branch=master
     :target: https://coveralls.io/github/socialgorithm/ultimate-ttt-py?branch=master
 
-.. _Ultimate TicTacToe Server: https://github.com/socialgorithm/ultimate-ttt-server
-.. _ReadTheDocs page: http://ultimate-ttt-py.readthedocs.io/en/latest/
+.. _Ultimate TicTacToe: https://socialgorithm.org/host
+.. _Ultimate TTT Docs: https://socialgorithm.org/ultimate-ttt-docs
+.. _API Reference: http://ultimate-ttt-py.readthedocs.io/en/latest/
+.. _Writing your first "intelligent" player: https://socialgorithm.org/ultimate-ttt-docs/sections/player/python-first.html

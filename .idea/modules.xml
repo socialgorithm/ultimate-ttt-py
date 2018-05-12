@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../socialgorithm.github.io/.idea/socialgorithm.github.io.iml" filepath="$PROJECT_DIR$/../socialgorithm.github.io/.idea/socialgorithm.github.io.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ultimate-ttt-py.iml" filepath="$PROJECT_DIR$/.idea/ultimate-ttt-py.iml" />
     </modules>
   </component>
