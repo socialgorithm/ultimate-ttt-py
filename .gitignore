@@ -1,6 +1,6 @@
 #IDE
-.idea/workspace.xml
-.idea/tasks.xml
+.idea/
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
