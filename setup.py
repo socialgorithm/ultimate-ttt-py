@@ -8,7 +8,9 @@ setup(name='ultimate_ttt',
       author='socialgorithm',
       author_email='hello@socialgorithm.org',
       url='https://github.com/socialgorithm/ultimate-ttt-py',
-      packages=['engine'],
+      packages=['engine','players'],
       setup_requires=['pytest-runner'],
-      tests_require=['pytest']
+      tests_require=['pytest'],
+      download_url="https://github.com/socialgorithm/ultimate-ttt-py/archive/1.2.tar.gz",
+      keywords = ['ultimate','tictactoe','uttt','ultimate-ttt']
       )

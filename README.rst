@@ -9,12 +9,11 @@ This repo contains a sample player and game engine for our `Ultimate TicTacToe`_
 Welcome!
 ========
 
-Welcome! You're probably here because you're currently participating in a hackathon we're running. We hope you enjoy this
-opportunity to code with abandon :)
+Welcome! You're probably here because you're in a hackathon we're running. 
 
-You should already have read atleast the Intro and Rules at `Ultimate TTT Docs`_.
+If so, make sure you've read the `Ultimate TTT Docs`_.
 
-After that, get stuck in with: `Writing your first "intelligent" player`_ | `API Reference`_
+Once you're ready to write your player, you can find functions that will help you write your player in `API Reference`_
 
 Contributors
 ============
@@ -49,4 +48,3 @@ You (and Travis CI) can ensure our tests pass by running :code:`./setup.py test`
 .. _Ultimate TicTacToe: https://socialgorithm.org/host
 .. _Ultimate TTT Docs: https://socialgorithm.org/ultimate-ttt-docs
 .. _API Reference: http://ultimate-ttt-py.readthedocs.io/en/latest/
-.. _Writing your first "intelligent" player: https://socialgorithm.org/ultimate-ttt-docs/sections/player/python-first.html
