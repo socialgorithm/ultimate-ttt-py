@@ -5,8 +5,3 @@ install:
 - pip install coveralls
 script: coverage run --source=ultimate_ttt setup.py test
 after_success: coveralls
-deploy:
-  provider: pypi
-  user: reddyalready
-  on:
-    tags: true
