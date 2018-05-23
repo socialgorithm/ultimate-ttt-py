@@ -76,8 +76,8 @@ def test_whenNextBoardIsAvailableThenGetValidBoardsReturnsOnlyThatBoard():
     board = MainBoard().add_my_move(MainBoardCoords(0, 0), SubBoardCoords(2, 2))
 
     # Only valid board now should be 2, 2
-    assert len(board.get_playable_sub_board_coords()) == 1
-    assert board.get_playable_sub_board_coords()[0] == MainBoardCoords(2, 2)
+    assert len(board.get_playable_coords()) == 1
+    assert board.get_playable_coords()[0] == MainBoardCoords(2, 2)
 
 
 def test_whenNextBoardIsFinishedThenAnyBoardCanBePlayed():
@@ -104,7 +104,7 @@ def test_whenMainBoardIsFinishedThenGetValidBoardsIsEmpty():
     main_board = force_sub_board_win(main_board, 1, 1, Player.ME)
     main_board = force_sub_board_win(main_board, 2, 2, Player.ME)
 
-    assert len(main_board.get_playable_sub_board_coords()) == 0
+    assert len(main_board.get_playable_coords()) == 0
 
 
 def test_whenNextBoardIsFinishedThenGetValidBoardsReturnsAllAvailableBoards():
@@ -120,7 +120,7 @@ def test_whenNextBoardIsFinishedThenGetValidBoardsReturnsAllAvailableBoards():
     # Play a move that will make the finished board the next board (Move 2, 2)
     main_board = main_board.add_my_move(MainBoardCoords(0, 0), SubBoardCoords(2, 2))
     # Playing anywhere is now allowed
-    valid_boards = main_board.get_playable_sub_board_coords()
+    valid_boards = main_board.get_playable_coords()
     assert len(valid_boards) == 8
     assert valid_boards == [MainBoardCoords(0, 0), MainBoardCoords(0, 1), MainBoardCoords(0, 2),
                             MainBoardCoords(1, 0), MainBoardCoords(1, 1), MainBoardCoords(1, 2),

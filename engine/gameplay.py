@@ -1,14 +1,5 @@
-from enum import Enum
-
-
-class Player(Enum):
-    """Identifiers for players"""
-    NONE = 0
-    ME = 1
-    ONE = 1
-    OPPONENT = 2
-    TWO = 2
-
+from .cell import Cell
+from .player import Player
 
 class SubBoardCoords(object):
     """Move co-ordinates (in a SubBoard)"""
@@ -35,18 +26,18 @@ class MainBoardCoords(SubBoardCoords):
         super().__init__(main_board_row, main_board_col)
 
 
-def did_move_win(board, board_coords, player):
+def did_move_win(board: [[Cell]], board_coords: SubBoardCoords, player: Player) -> bool:
     """Whether the given player move was a winning move (this assumes that the move is already present in the board)"""
     return (is_row_won(board, board_coords, player) or is_col_won(board, board_coords, player) or
             is_diagonal_won(board, player))
 
 
-def is_row_won(board, board_coords, player):
+def is_row_won(board: [[Cell]], board_coords: SubBoardCoords, player: Player) -> bool:
     """Whether the row of the player move is won by the player of the move"""
     return is_cell_range_played_by(board[board_coords.row], player)
 
 
-def is_col_won(board, board_coords, player):
+def is_col_won(board: [[Cell]], board_coords: SubBoardCoords, player: Player) -> bool:
     """Whether the column of the player move is won by the player of the move"""
     for row in board:
         if not row[board_coords.col].played_by == player:
@@ -54,27 +45,27 @@ def is_col_won(board, board_coords, player):
     return True
 
 
-def is_diagonal_won(board, player):
+def is_diagonal_won(board: [[Cell]], player: Player) -> bool:
     """Whether either diagonal from the cell of the player move is won by the player"""
 
     return is_ltr_diagonal_won(board, player) or is_rtl_diagonal_won(board, player)
 
 
-def is_ltr_diagonal_won(board, player):
+def is_ltr_diagonal_won(board: [[Cell]], player: Player) -> bool:
     """Whether the left to right (0,0) to (2,2) diagonal has been won by the given player"""
     cells = [board[0][0], board[1][1], board[2][2]]
 
     return is_cell_range_played_by(cells, player)
 
 
-def is_rtl_diagonal_won(board, player):
+def is_rtl_diagonal_won(board: [[Cell]], player: Player) -> bool:
     """Whether the left to right (2,0) to (0,2) diagonal has been won by the given player"""
     cells = [board[2][0], board[1][1], board[0][2]]
 
     return is_cell_range_played_by(cells, player)
 
 
-def is_cell_range_played_by(cells, player):
+def is_cell_range_played_by(cells: [[Cell]], player: Player) -> bool:
     """Whether the given list of cells are all played by the given player
 
     Args:

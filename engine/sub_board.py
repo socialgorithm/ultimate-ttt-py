@@ -1,10 +1,10 @@
 from copy import deepcopy
 
 from .cell import Cell
-from .gameplay import Player, SubBoardCoords
-from .gameplay import did_move_win
 from .errors import MoveOutsideSubBoardError, MoveInPlayedCellError, \
     MoveInFinishedBoardError, BoardNotFinishedError
+from .gameplay import Player, SubBoardCoords
+from .gameplay import did_move_win
 
 
 class SubBoard(object):
@@ -30,8 +30,8 @@ class SubBoard(object):
 
     """
 
-    def __init__(self, board_size=3):
-        if not isinstance(board_size, int) or not board_size == 3:
+    def __init__(self, board_size: int = 3):
+        if not board_size == 3:
             raise ValueError("Size must be integer of size 3 (for now)")
 
         self._board_size = board_size
@@ -40,25 +40,25 @@ class SubBoard(object):
             for board_row in range(board_size)
         ]
 
-        self._max_moves = board_size * board_size;
+        self._max_moves = board_size * board_size
         self._moves_so_far = 0
 
         self._is_finished = False
         self._winner = Player.NONE
 
     @property
-    def is_finished(self):
+    def is_finished(self) -> bool:
         """Whether the board is finished (tied, won or lost)"""
         return self._is_finished
 
     @property
-    def winner(self):
+    def winner(self) -> Player:
         """The winner of the board if finished. Exception otherwise"""
         if not self._is_finished:
             raise BoardNotFinishedError
         return self._winner
 
-    def add_my_move(self, sub_board_coords):
+    def add_my_move(self, sub_board_coords: SubBoardCoords) -> 'SubBoard':
         """Adds a move for the current player
 
         Args:
@@ -69,7 +69,7 @@ class SubBoard(object):
         """
         return self.add_move(sub_board_coords, Player.ME)
 
-    def add_opponent_move(self, sub_board_coords):
+    def add_opponent_move(self, sub_board_coords: SubBoardCoords) -> 'SubBoard':
         """Adds a move for the opponent
 
         Args:
@@ -89,7 +89,7 @@ class SubBoard(object):
             pretty_printed += '\n'
         return pretty_printed
 
-    def add_move(self, sub_board_coords, player):
+    def add_move(self, sub_board_coords: SubBoardCoords, player: Player) -> 'SubBoard':
         """Adds a move by a ultimate_ttt_player to a deep copy of the board, returning the copy
 
         Player may find it easier to use the :func:`~add_my_move` and
@@ -126,7 +126,7 @@ class SubBoard(object):
 
         return updated_sub_board
 
-    def get_playable_coords(self):
+    def get_playable_coords(self) -> [SubBoardCoords]:
         """
         Returns:
             All valid SubBoardCoords that can be played (have not been played
@@ -135,37 +135,37 @@ class SubBoard(object):
         """
         if self.is_finished:
             return []
-        valid_moves = []
+        valid_coords = []
         for row_index in range(0, self._board_size):
             for col_index in range(0, self._board_size):
                 if not self._board[row_index][col_index].is_played():
-                    valid_moves.append(SubBoardCoords(row_index, col_index))
-        return valid_moves
+                    valid_coords.append(SubBoardCoords(row_index, col_index))
+        return valid_coords
 
     # Private functions
-    def _is_move_in_bounds(self, move):
+    def _is_move_in_bounds(self, sub_board_coords: SubBoardCoords) -> bool:
         """Checks whether the given move is inside the boundaries of this board
 
         Args:
-            move: The intended move
+            sub_board_coords: The intended move
 
         Returns:
             True if the move is within the bounds of this board, False otherwise
         """
-        if 0 <= move.row < len(self._board) and 0 <= move.col < len(self._board):
+        if 0 <= sub_board_coords.row < len(self._board) and 0 <= sub_board_coords.col < len(self._board):
             return True
         return False
 
-    def _is_move_already_played(self, move):
+    def _is_move_already_played(self, sub_board_coords: SubBoardCoords) -> bool:
         """Checks whether the given move is already played in this board
 
         Args:
-            move: The intended move
+            sub_board_coords: The intended move
 
         Returns:
             True if the cell referenced by the move is already played, False otherwise
         """
-        return self._board[move.row][move.col].is_played()
+        return self._board[sub_board_coords.row][sub_board_coords.col].is_played()
 
     def __iter__(self):
         return self._board.__iter__()

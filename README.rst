@@ -4,7 +4,7 @@ Ultimate TicTacToe - Python Player & Game Engine
 
 |Travis| |PyPI| |Coverage|
 
-This repo contains a sample player and game engine for our `Ultimate TicTacToe`_ hackathon.
+This repo contains a sample player and game engine for our `Ultimate TicTacToe`_ workshop.
 
 Welcome!
 ========
@@ -45,6 +45,6 @@ You (and Travis CI) can ensure our tests pass by running :code:`./setup.py test`
 .. |Coverage| image:: https://coveralls.io/repos/github/socialgorithm/ultimate-ttt-py/badge.svg?branch=master
     :target: https://coveralls.io/github/socialgorithm/ultimate-ttt-py?branch=master
 
-.. _Ultimate TicTacToe: https://socialgorithm.org/host
+.. _Ultimate TicTacToe: https://uttt.socialgorithm.org
 .. _Ultimate TTT Docs: https://socialgorithm.org/ultimate-ttt-docs
-.. _API Reference: http://ultimate-ttt-py.readthedocs.io/en/latest/
+.. _API Reference: https://ultimate-ttt-py.readthedocs.io/en/latest/

@@ -1,6 +1,7 @@
 """
 Errors for the Ultimate TicTacToe Engine
 """
+from .gameplay import MainBoardCoords
 
 
 class Error(Exception):
@@ -9,7 +10,7 @@ class Error(Exception):
 
 
 class MoveOutsideMainBoardError(Error):
-    def __init__(self, main_board_coords):
+    def __init__(self, main_board_coords: MainBoardCoords):
         self.coords = main_board_coords
 
     def __str__(self):
@@ -17,7 +18,7 @@ class MoveOutsideMainBoardError(Error):
 
 
 class MoveNotOnNextBoardError(Error):
-    def __init__(self, main_board_coords, sub_board_next_player_must_play):
+    def __init__(self, main_board_coords: MainBoardCoords, sub_board_next_player_must_play):
         self.main_board_coords = main_board_coords
         self.sub_board_next_player_must_play = sub_board_next_player_must_play
 
