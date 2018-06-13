@@ -1,27 +1,6 @@
-================================================
-Ultimate TicTacToe - Python Player & Game Engine
-================================================
-
-|Travis| |PyPI| |Coverage|
-
-This repo contains a sample player and game engine for our `Ultimate TicTacToe`_ workshop.
-
-Welcome!
-========
-
-Welcome! You're probably here because you're in a hackathon we're running. 
-
-If so, make sure you've read the `Ultimate TTT Docs`_.
-
-Once you're ready to write your player, you can find functions that will help you write your player in `API Reference`_
-
-Contributors
-============
-
-If you're interested in contributing a player or even features to the game engine:
-
-1. **Thank you**!
-2. Please read the `Contribution Guide`_
+=====================================================================
+Ultimate TicTacToe - Python Player & Game Engine - Contribution Guide
+=====================================================================
 
 Pull Requests
 _____________
@@ -35,6 +14,21 @@ Running Tests
 -------------
 
 You (and Travis CI) can ensure our tests pass by running :code:`./setup.py test` in the root directory. Keep it that way!
+
+Pushing New Versions
+--------------------
+
+To push a new version:
+
+1. Update the :code:`version` string in the :code:`setup.py` file to the new version
+1.
+
+Update Documentation
+--------------------
+
+You must have `sphinx` and `sphinx-autobuild` installed
+
+
 
 .. Images and Links
 

@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Ultimate TTT Python Engine'
-copyright = '2017, Socialgorithm'
+copyright = '2018, Socialgorithm'
 author = 'Socialgorithm'
 
 # The version info for the project you're documenting, acts as replacement for

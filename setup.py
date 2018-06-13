@@ -7,7 +7,7 @@ with open('README.rst') as f:
     readme = f.read()
 
 setup(name='ultimate_ttt',
-      version='1.3',
+      version='1.4',
       description='Game engine and sample player for Ultimate TicTacToe games',
       long_description=readme,
       author='socialgorithm',
