@@ -40,11 +40,11 @@ class MainBoard(object):
             for board_row in range(board_size)
         ]
 
-        self._next_player: Player = Player.NONE
-        self._sub_board_next_player_must_play: MainBoardCoords = None
+        self._next_player = Player.NONE  # type: Player
+        self._sub_board_next_player_must_play = None  # type: MainBoardCoords
 
-        self._is_finished: bool = False
-        self._winner: Player = Player.NONE
+        self._is_finished = False  # type: bool
+        self._winner = Player.NONE  # type: Player
 
     @property
     def sub_board_next_player_must_play(self) -> MainBoardCoords:
@@ -200,7 +200,8 @@ class MainBoard(object):
 
         # Check that the next board to play is not finished
         if not updated_main_board._board[sub_board_coords.row][sub_board_coords.col].is_finished:
-            updated_main_board._sub_board_next_player_must_play = MainBoardCoords(sub_board_coords.row, sub_board_coords.col)
+            updated_main_board._sub_board_next_player_must_play = MainBoardCoords(sub_board_coords.row,
+                                                                                  sub_board_coords.col)
         else:
             updated_main_board._sub_board_next_player_must_play = None
 
