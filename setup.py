@@ -16,6 +16,6 @@ setup(name='ultimate_ttt',
       packages=['engine','players'],
       setup_requires=['pytest-runner'],
       tests_require=['pytest'],
-      download_url="https://github.com/socialgorithm/ultimate-ttt-py/archive/1.3.tar.gz",
+      download_url="https://github.com/socialgorithm/ultimate-ttt-py/archive/1.4.tar.gz",
       keywords='ultimate tictactoe uttt ultimate-ttt'
 )
