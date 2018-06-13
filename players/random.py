@@ -1,5 +1,4 @@
 import random
-from typing import Tuple
 
 from engine import MainBoardCoords, SubBoardCoords, SubBoard
 from players.stdout import StdOutPlayer
@@ -9,7 +8,7 @@ class Random(StdOutPlayer):
     def __init__(self):
         super().__init__()
 
-    def get_my_move(self) -> Tuple[MainBoardCoords, SubBoardCoords]:
+    def get_my_move(self):  # -> Tuple[MainBoardCoords, SubBoardCoords]
         main_board_coords = self.pick_next_main_board_coords()
         sub_board = self.main_board.get_sub_board(main_board_coords)
         sub_board_coords = self.pick_random_sub_board_coords(sub_board)
