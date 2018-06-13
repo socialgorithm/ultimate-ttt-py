@@ -23,19 +23,6 @@ If you're interested in contributing a player or even features to the game engin
 1. **Thank you**!
 2. Please read the `Contribution Guide`_
 
-Pull Requests
-_____________
-
-To make a contribution, please fork this repository and open a pull request. We are grateful for anything that can be
-improved for the students taking part in our hackathons.
-
-In general, any new functionality or player should be tested to ensure it is behaving as expected.
-
-Running Tests
--------------
-
-You (and Travis CI) can ensure our tests pass by running :code:`./setup.py test` in the root directory. Keep it that way!
-
 .. Images and Links
 
 .. |Travis| image:: https://travis-ci.org/socialgorithm/ultimate-ttt-py.svg?branch=master

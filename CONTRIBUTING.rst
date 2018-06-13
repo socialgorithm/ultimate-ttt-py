@@ -20,15 +20,12 @@ Pushing New Versions
 
 To push a new version:
 
-1. Update the :code:`version` string in the :code:`setup.py` file to the new version
-1.
-
-Update Documentation
---------------------
-
-You must have `sphinx` and `sphinx-autobuild` installed
-
-
+1. Update the :code:`version` string and :code:`download_url` in the :code:`setup.py` file to the new version
+1. Update the documentation
+  1. `cd docs`
+  1. `sphinx-apidoc -o source/ ../engine`
+  1. `make html`
+1. Create a git tag for the new version and push that
 
 .. Images and Links
 
