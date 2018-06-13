@@ -20,12 +20,15 @@ Pushing New Versions
 
 To push a new version:
 
-1. Update the :code:`version` string and :code:`download_url` in the :code:`setup.py` file to the new version
-1. Update the documentation
-  1. `cd docs`
-  1. `sphinx-apidoc -o source/ ../engine`
-  1. `make html`
-1. Create a git tag for the new version and push that
+#. Update the :code:`version` string and :code:`download_url` in the :code:`setup.py` file to the new version
+#. Update the documentation
+
+   #. `cd docs`
+   #. `sphinx-apidoc -o source/ ../engine`
+   #. `make html`
+#. Create a git tag for the new version and push that
+#. Upload to PyPI:
+   #. `python setup.py sdist upload -r pypi`
 
 .. Images and Links
 
