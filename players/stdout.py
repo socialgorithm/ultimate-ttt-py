@@ -29,7 +29,7 @@ class StdOutPlayer(UltimatePlayer):
 
     @staticmethod
     def write_move(main_board_coords: MainBoardCoords, sub_board_coords: SubBoardCoords):
-        move_str = "%d,%d;%d,%d" % (
+        move_str = "send:%d,%d;%d,%d" % (
             main_board_coords.row, main_board_coords.col, sub_board_coords.row, sub_board_coords.col)
         print(move_str)
         sys.stdout.flush()
