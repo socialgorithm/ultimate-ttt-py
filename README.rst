@@ -2,8 +2,6 @@
 Ultimate TicTacToe - Python Player & Game Engine
 ================================================
 
-|Travis| |PyPI| |Coverage|
-
 This repo contains a sample player and game engine for our `Ultimate Tic-Tac-Toe workshop_`.
 
 Welcome!
