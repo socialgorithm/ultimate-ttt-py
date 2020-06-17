@@ -12,7 +12,23 @@ class UltimatePlayer(metaclass=ABCMeta):
         self.main_board = MainBoard(self.board_size)
 
     @abstractmethod
-    def get_my_move(self):
+    def onMove(self):
+        pass
+    
+    @abstractmethod
+    def onOpponent(self, board, move):
+        pass
+
+    @abstractmethod
+    def gameOver(self, result, board, move):
+        pass
+
+    @abstractmethod
+    def matchOver(self, result):
+        pass
+    
+    @abstractmethod
+    def timeout(self):
         pass
 
     @property
