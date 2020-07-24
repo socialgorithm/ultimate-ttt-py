@@ -23,3 +23,12 @@ class Random(StdOutPlayer):
     @staticmethod
     def pick_random_sub_board_coords(sub_board: SubBoard) -> SubBoardCoords:
         return random.choice(sub_board.get_playable_coords())
+
+    def timeout(self):
+        return
+
+    def game_over(self, winLoseTie: str, main_board_coords: MainBoardCoords, sub_board_coords: SubBoardCoords):
+        return
+
+    def match_over(self, winLoseTie: str, main_board_coords: MainBoardCoords, sub_board_coords: SubBoardCoords):
+        return

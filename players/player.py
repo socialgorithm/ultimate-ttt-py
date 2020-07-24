@@ -15,6 +15,18 @@ class UltimatePlayer(metaclass=ABCMeta):
     def get_my_move(self):
         pass
 
+    @abstractmethod
+    def timeout(self):
+        pass
+
+    @abstractmethod
+    def game_over(self, winLoseTie: str, main_board_coords: MainBoardCoords, sub_board_coords: SubBoardCoords):
+        pass
+
+    @abstractmethod
+    def match_over(self, winLoseTie: str, main_board_coords: MainBoardCoords, sub_board_coords: SubBoardCoords):
+        pass
+
     @property
     def is_game_finished(self) -> bool:
         return self.main_board.is_finished
