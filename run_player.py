@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from players import Random
+from players import Random, Defensive, FirstAvailable
 
 
 def main():
@@ -12,5 +12,16 @@ def main():
 
 
 if __name__ == "__main__":
-    player = Random()
+    if 2>len(sys.argv):
+        player = Random()
+    else:
+        name=sys.argv[1]
+        if name == 'Random':
+            player = Random()
+        elif name == 'FirstAvailable':
+            player = FirstAvailable()
+        elif name == 'Defensive':
+            player = Defensive()
+        else:
+            raise Exception('unknown player')
     main()
